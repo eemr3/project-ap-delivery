@@ -11,12 +11,20 @@ module.exports = {
       user_id: {
         foreignKey: true,
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        }
       },
       seller_id: {
         foreignKey: true,
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: "users",
+          key: "id",
+        }
       },
       total_price: {
         type: Sequelize.DECIMAL(9,2)
@@ -28,7 +36,7 @@ module.exports = {
         type: Sequelize.STRING(50)
       },
       sale_date: {
-        type: Sequelize.DATETIME
+        type: Sequelize.DATEONLY
       },
       status: {
         type: Sequelize.STRING(50)
