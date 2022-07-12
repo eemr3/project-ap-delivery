@@ -1,0 +1,109 @@
+.login-page {
+  align-items: center;
+  background-color: rgb(250, 184, 61);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.logo > img {
+  width: 100px;
+}
+
+.logo > h1 {
+  color: rgb(137, 78, 0);
+  margin: 0;
+}
+
+form {
+  background-color: whitesmoke;
+  border-radius: 2px;
+  padding: 20px;
+}
+
+form > label > input, form > button {
+  box-sizing: border-box;
+  display: block;
+}
+
+form > label {
+  color: rgb(39, 39, 39);
+}
+
+form > label > input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid rgb(244, 192, 36);
+  border-radius: 2px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-top: 8px;
+  padding: 5px 10px;
+  width: 350px;
+}
+
+form > label > input:focus {
+  outline: none;
+}
+
+form > .btn-login {
+  background-color: rgb(244, 192, 36);
+  border: none;
+  border-radius: 2px;
+  color: rgb(24, 24, 24);
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 8px;
+  width: 100%;
+}
+
+form > .btn-login:disabled {
+  background-color: rgb(205, 203, 203);
+  color: gray;
+  cursor: not-allowed;
+}
+
+hr {
+  border: 1px solid rgb(226, 226, 226);
+}
+
+.division-or {
+  background-color: whitesmoke;
+  color: rgb(203, 203, 203);
+  display: block;
+  margin: 0 auto;
+  margin-top: -18px;
+  text-align: center;
+  width: 40px;
+}
+
+form > .btn-redirect-register {
+  background-color: transparent;
+  border: none;
+  color: rgb(40, 40, 40);
+  cursor: pointer;
+  margin: auto;
+  margin-top: 10px;
+}
+
+form > .btn-redirect-register:hover {
+  text-decoration: underline rgb(118, 118, 118);
+  text-underline-offset: 3px;
+}
+
+.msg-error {
+  color: rgb(189, 48, 48);
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+}
