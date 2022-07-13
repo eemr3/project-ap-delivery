@@ -71,28 +71,26 @@ function Login() {
     <main className="login-page">
       <div className="logo">
         <img src={ logo } alt="logo" />
-        <h1>G9 Delivery</h1>
+        <h1>Entrar</h1>
       </div>
       <form>
         <label htmlFor="email">
-          Login
           <input
             type="email"
             name="email"
             id="email"
             onChange={ emailHandleChange }
-            placeholder="email@g9delivery.com.br"
+            placeholder="Email"
             data-testid="common_login__input-email"
           />
         </label>
         <label htmlFor="password">
-          Senha
           <input
             type="password"
             name="password"
             id="password"
             onChange={ passwordHandleChange }
-            placeholder="••••••"
+            placeholder="Senha"
             data-testid="common_login__input-password"
           />
         </label>
@@ -102,7 +100,7 @@ function Login() {
           data-testid="common_login__element-invalid-email"
           style={ { display: viewErro ? 'block' : 'none' } }
         >
-          Login inválido
+          Email ou senha inválidos
         </span>
 
         <button
@@ -112,18 +110,24 @@ function Login() {
           data-testid="common_login__button-login"
           disabled={ validateEmail(email) && (password.length >= six) ? 0 : 1 }
         >
-          LOGIN
+          Continuar
         </button>
-        <hr />
-        <span className="division-or">ou</span>
-        <button
-          type="button"
-          className="btn-redirect-register"
-          data-testid="common_login__button-register"
-          onClick={ () => navigate('../register', { replace: true }) }
-        >
-          Ainda não tenho conta
-        </button>
+        <div className="redirect-register-container">
+          <button
+            type="button"
+            className="btn-register-text"
+          >
+            Não possui conta?
+          </button>
+          <button
+            type="button"
+            className="btn-redirect-register"
+            data-testid="common_login__button-register"
+            onClick={ () => navigate('../register', { replace: true }) }
+          >
+            Criar conta
+          </button>
+        </div>
       </form>
     </main>
   );
