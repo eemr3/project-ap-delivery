@@ -1,10 +1,10 @@
 const SigninService = require('../services/Login.service');
 
-const signin = async (req, res) => {
+const signIn = async (req, res) => {
     const { email, password } = req.body;
-    const user = await SigninService.signin(email, password);
+    const user = await SigninService.signIn(email, password);
   
     return res.status(200).json(user);
 };
 
-module.exports = { signin };
+module.exports = { signIn };
