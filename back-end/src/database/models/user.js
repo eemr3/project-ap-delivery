@@ -33,12 +33,12 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, {
-    modelName: 'users',
+    tableName: 'users',
     timestamps: false
   });
 
   User.associate = (models) => {
-    User.hasMany(models.sale, {
+    User.hasMany(models.Sale, {
       as: 'sales',
       foreignKey: 'id',
     });

@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     status: DataTypes.STRING
   }, {
     underscored: true,
-    modelName: 'users',
+    tableName: 'users',
     timestamps: false
   });
 
