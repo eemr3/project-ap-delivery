@@ -18,9 +18,11 @@ const signIn = async (emailUser, password) => {
    const token = await createdToken({ name, email, role });
 
   return {
-    name,
-    email,
-    role,    
+    user: {
+      name,
+      email,
+      role,    
+    },
     token,
   };
 };
