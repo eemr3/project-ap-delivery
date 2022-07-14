@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { requestLogin } from '../services/deliveryAPI';
 import logo from '../images/logo.png';
 import '../styles/Register.css';
@@ -9,7 +9,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewError, setViewError] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useHistory();
   const six = 6;
   const twelve = 12;
 
@@ -24,12 +24,11 @@ function Register() {
     try {
       const endpoint = '/register';
       const role = 'customer';
-      const response = await requestLogin(endpoint, { name, email, password, role });
-      console.log(response);
+      await requestLogin(endpoint, { name, email, password, role });
       localStorage.setItem('user', JSON.stringify(
-        { ...response.dataValues, token: response.token },
+        { name, email, role, token: response.hasToken },
       ));
-      navigate('../customer/products');
+      navigate.push('/customer/products');
       setViewError(false);
     } catch (error) {
       console.log(error);
