@@ -9,6 +9,7 @@ const validateEmail = (e) => {
   return re.test(e);
 };
 
+const ROUTE_CUSTOMER_PRODUCTS = '/customer/products';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
