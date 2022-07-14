@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Login.css';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { requestLogin } from '../services/deliveryAPI';
 
@@ -9,6 +9,7 @@ const validateEmail = (e) => {
   return re.test(e);
 };
 
+const ROUTE_CUSTOMER_PRODUCTS = '/customer/products';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,13 +23,13 @@ function Login() {
     const redirect = (user) => {
       switch (user.role) {
       case 'administrator':
-        navigate(ROUTE_ADMIN_MANAGE);
+        navigate.push(ROUTE_ADMIN_MANAGE);
         break;
       case 'seller':
-        navigate(ROUTE_SELLER_ORDERS);
+        navigate.push(ROUTE_SELLER_ORDERS);
         break;
       default:
-        navigate(ROUTE_CUSTOMER_PRODUCTS);
+        navigate.push(ROUTE_CUSTOMER_PRODUCTS);
         break;
       }
     };
@@ -50,13 +51,13 @@ function Login() {
 
       switch (user.role) {
       case 'administrator':
-        navigate(ROUTE_ADMIN_MANAGE);
+        navigate.push(ROUTE_ADMIN_MANAGE);
         break;
       case 'seller':
-        navigate(ROUTE_SELLER_ORDERS);
+        navigate.push(ROUTE_SELLER_ORDERS);
         break;
       default:
-        navigate(ROUTE_CUSTOMER_PRODUCTS);
+        navigate.push(ROUTE_CUSTOMER_PRODUCTS);
         break;
       }
     } catch (error) {
@@ -123,7 +124,7 @@ function Login() {
             type="button"
             className="btn-redirect-register"
             data-testid="common_login__button-register"
-            onClick={ () => navigate('../register', { replace: true }) }
+            onClick={ () => navigate.push('../register', { replace: true }) }
           >
             Criar conta
           </button>
