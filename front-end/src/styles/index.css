@@ -4,11 +4,13 @@ html {
 
 * {
   font-family: Encode Sans , sans-serif;
+  font-kerning: normal;
   margin: 0;
 }
 
 body {
   font-family: roboto , sans-serif;
+  font-kerning: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
