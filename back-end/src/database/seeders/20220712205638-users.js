@@ -6,28 +6,22 @@ module.exports = {
       "users",
       [
         {
-          name: "John Doe",
-          email: "johndoe@test.com",
-          password: "$2a$12$cektvgvtIEmOUA3VkLAfC.yKOpPuOtb38e13PcTbqGyrOb4lHFz.G", //senha: 123456
-          role: "customer",
-        },
-        {
-          name: "Peter Pan",
-          email: "peterpan@test.com",
-          password: "$2a$10$2L23DzVelr6iFnFONTJd8.nYhf3VUz6AwjjBD09TebpmSYMKr.ZIq", //senha: 1234567
-          role: "customer",
-        },
-        {
-          name: "Dona Tereza",
-          email: "donatereza@test.com",
-          password: "$2a$10$WSDszvJDWZ6SIIEhG7TQEuwHtH.KRAgfvmh8kBKwNHH5lrEqcr77W", //senha: 12345678
+          name: "Delivery App Admin",
+          email: "adm@deliveryapp.com",
+          password: "a4c86edecc5aee06eff8fdeda69e0d04", //senha: --adm2@21!!--
           role: "administrator",
         },
         {
-          name: "Zé das Coves",
-          email: "zedascoves@test.com",
-          password: "$2a$10$.fxQUHrhSwZQajUjbjvmgOnw7sVt9nlRMxsXqyrCHT4OBSfcSqjeW", // senha: 123456789
+          name: "Fulana Pereira",
+          email: "fulana@deliveryapp.com",
+          password: "3c28d2b0881bf46457a853e0b07531c6", //senha: fulana@123
           role: "seller",
+        },
+        {
+          name: "Cliente Zé Birita",
+          email: "zebirita@email.com",
+          password: "1c37466c159755ce1fa181bd247cb925", //senha: $#zebirita#$
+          role: "customer",
         },
       ],
       {}

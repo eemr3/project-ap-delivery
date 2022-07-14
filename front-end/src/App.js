@@ -1,14 +1,17 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './styles/App.css';
 import Login from './pages/Login';
+import Products from './pages/Products';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={ <Navigate to="/login" /> } />
-      <Route path="/login" element={ <Login /> } />
-    </Routes>
+    <Switch>
+      <Route path="/login" component={ Login } default />
+      <Redirect exact from="/" to="/login" />
+      <Route erender={ () => <Redirect to="/login" /> } />
+      <Route path="/customer/products" component={ Products } />
+    </Switch>
   );
 }
 
