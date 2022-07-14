@@ -9,6 +9,7 @@ app.use(express.json());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
 app.use('/login', routes.LoginRouter);
+app.use('/register', routes.RegisterRouter);
 
 app.use(handleError);
 module.exports = app;
