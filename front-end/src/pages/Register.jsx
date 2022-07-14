@@ -8,7 +8,7 @@ function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [viewErro, setViewErro] = useState(false);
+  const [viewError, setViewError] = useState(false);
   const navigate = useNavigate();
   const six = 6;
   const twelve = 12;
@@ -30,10 +30,10 @@ function Register() {
         { ...response.dataValues, token: response.token },
       ));
       navigate('../customer/products');
-      setViewErro(false);
+      setViewError(false);
     } catch (error) {
       console.log(error);
-      setViewErro(true);
+      setViewError(true);
     }
   };
 
@@ -77,7 +77,7 @@ function Register() {
         <span
           className="msg-error"
           data-testid="common_register__element-invalid_register"
-          style={ { display: viewErro ? 'block' : 'none' } }
+          style={ { display: viewError ? 'block' : 'none' } }
         >
           Usuário já existente
         </span>
