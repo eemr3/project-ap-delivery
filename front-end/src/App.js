@@ -9,10 +9,10 @@ function App() {
   return (
     <Switch>
       <Route path="/login" component={ Login } default />
-      <Redirect exact from="/" to="/login" />
-      <Route erender={ () => <Redirect to="/login" /> } />
       <Route path="/register" component={ Register } />
-      <Route path="/customer/products" component={ Products } />      
+      <Route path="/customer/products" component={ Products } />
+      <Redirect exact from="/" to="/login" />
+      <Route render={ () => <Redirect to="/login" /> } />
     </Switch>
 
   );

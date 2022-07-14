@@ -14,13 +14,14 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [viewError, setViewError] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useHistory();
 
   const emailHandleChange = ({ target }) => setEmail(target.value);
   const passwordHandleChange = ({ target }) => setPassword(target.value);
 
   useEffect(() => {
     const redirect = (user) => {
+      console.log(user);
       switch (user.role) {
       case 'administrator':
         navigate.push(ROUTE_ADMIN_MANAGE);
@@ -44,10 +45,8 @@ function Login() {
     try {
       const endpoint = '/login';
       const response = await requestLogin(endpoint, { email, password });
-      console.log(response.user);
-
-      const { user } = response;
-      localStorage.setItem('user', JSON.stringify({ ...user, token: response.token }));
+      const { user, hasToken } = response;
+      localStorage.setItem('user', JSON.stringify({ ...user, token: hasToken }));
 
       switch (user.role) {
       case 'administrator':
