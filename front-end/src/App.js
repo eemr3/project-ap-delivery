@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './styles/App.css';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import Products from './pages/Products';
 
 function App() {
@@ -10,8 +11,10 @@ function App() {
       <Route path="/login" component={ Login } default />
       <Redirect exact from="/" to="/login" />
       <Route erender={ () => <Redirect to="/login" /> } />
-      <Route path="/customer/products" component={ Products } />
+      <Route path="/register" component={ Register } />
+      <Route path="/customer/products" component={ Products } />      
     </Switch>
+
   );
 }
 

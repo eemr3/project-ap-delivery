@@ -13,8 +13,8 @@ const ROUTE_CUSTOMER_PRODUCTS = '/customer/products';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [viewErro, setViewErro] = useState(false);
-  const navigate = useHistory();
+  const [viewError, setViewError] = useState(false);
+  const navigate = useNavigate();
 
   const emailHandleChange = ({ target }) => setEmail(target.value);
   const passwordHandleChange = ({ target }) => setPassword(target.value);
@@ -62,7 +62,7 @@ function Login() {
       }
     } catch (error) {
       console.log(error);
-      setViewErro(true);
+      setViewError(true);
     }
   };
 
@@ -99,7 +99,7 @@ function Login() {
         <span
           className="msg-error"
           data-testid="common_login__element-invalid-email"
-          style={ { display: viewErro ? 'block' : 'none' } }
+          style={ { display: viewError ? 'block' : 'none' } }
         >
           Email ou senha inválidos
         </span>
