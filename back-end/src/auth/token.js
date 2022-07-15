@@ -7,14 +7,14 @@ const createdToken = async (user) => {
     expiresIn: '30d',
     algorithm: 'HS256',
   });
-   
+
   return token;
 };
 
 const decodedToken = async (token) => {
   const secret = await fs.readFile('./jwt.evaluation.key', 'utf-8');
   try {
-    const dedocoded = jwt.verify(token, secret);
+    const decoded = jwt.verify(token, secret);
     return decoded;
   } catch (error) {
     return false;

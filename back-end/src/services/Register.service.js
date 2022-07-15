@@ -10,7 +10,7 @@ const createRegister = async (userInfo) => {
     name,
     email,
     role: 'customer',
-  }
+  };
 
   const hasToken = await createdToken(user);
   const encryptedPassword = md5(password);
