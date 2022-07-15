@@ -15,7 +15,7 @@ const notFound = {
 
 const conflict = {
   status: 409,
-  message: 'Email or password incorrect',
+  message: 'E-mail or password incorrect',
 };
 
 module.exports = {

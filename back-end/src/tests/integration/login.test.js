@@ -12,14 +12,14 @@ describe("Rota de Login", () => {
   describe('metodo "POST"', () => {
     it("testa se é possivel realizar login com sucesso", async () => {
       const response = await chai.request(app).post("/login").send({
-        email: 'johndoe@test.com',
-        password: '123456'
+        email: 'zebirita@email.com',
+        password: '$#zebirita#$'
       });
       expect(response).to.have.status(200);
-      expect(response.body).to.have.property("name");
-      expect(response.body).to.have.property("email");
-      expect(response.body).to.have.property("role");
-      expect(response.body).to.have.property("token");
+      expect(response.body.user).to.have.property("name");
+      expect(response.body.user).to.have.property("email");
+      expect(response.body.user).to.have.property("role");
+      expect(response.body).to.have.property("hasToken");
 
       expect(response.body).to.not.have.property("password");
     });
