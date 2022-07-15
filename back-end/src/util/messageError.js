@@ -14,7 +14,7 @@ const notFound = {
 };
 
 const conflict = {
-  status: 409,
+  status: 404,
   message: 'E-mail or password incorrect',
 };
 
