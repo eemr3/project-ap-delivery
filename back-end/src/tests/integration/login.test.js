@@ -14,13 +14,6 @@ describe("Rota de Login", () => {
   
   describe('metodo "POST"', () => {
     it("testa se é possivel realizar login com sucesso", async () => {
-      sinon.stub(User, "findOne").resolves({
-        "name": "john doe tester",
-        "email": "johndoe@test.com",
-        "role": "customer",
-        "password": "e10adc3949ba59abbe56e057f20f883e"
-      });
-
       const response = await chai.request(app).post("/login").send({
         email: 'johndoe@test.com',
         password: '123456'
@@ -36,13 +29,9 @@ describe("Rota de Login", () => {
       expect(response.body).to.have.property("hasToken");
 
       expect(response.body.user).to.not.have.property("password");
-
-      User.findOne.restore();
     });
 
     it("Testa erro da requisição com email incorreto", async () => {
-      sinon.stub(User, "findOne").resolves(null);
-
       const response = await chai.request(app).post("/login").send({
         email: "teste@teste.com",
         password: "123456",
@@ -51,8 +40,6 @@ describe("Rota de Login", () => {
       expect(response.statusCode).to.be.equal(404);
       expect(response.body).to.have.property('message');
       expect(response.body.message).to.equal('E-mail or password incorrect');
-
-      User.findOne.restore();
     });
 
     it("Testa erro da requisição com senha inválidos", async () => {
