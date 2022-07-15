@@ -30,7 +30,7 @@ describe("Rota de Login", () => {
         password: "123456",
       });
       
-      expect(response.statusCode).to.be.equal(404);
+      expect(response.statusCode).to.be.equal(409);
       expect(response.body).to.have.property('message');
       expect(response.body.message).to.equal('E-mail or password incorrect');
     });
