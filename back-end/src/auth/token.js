@@ -13,9 +13,9 @@ const createdToken = async (user) => {
 
 const decodedToken = (token) => {
   try {
-    const dedocoded = jwt.verify(token, fs.readFile('./jwt.evaluation.key', 'utf-8'));
+    const decoded = jwt.verify(token, fs.readFile('./jwt.evaluation.key', 'utf-8'));
 
-    return dedocoded;
+    return decoded;
   } catch (error) {
     return false;
   }
