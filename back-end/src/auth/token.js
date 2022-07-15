@@ -15,8 +15,7 @@ const decodedToken = async (token) => {
   const secret = await fs.readFile('./jwt.evaluation.key', 'utf-8');
   try {
     const dedocoded = jwt.verify(token, secret);
-
-    return dedocoded;
+    return decoded;
   } catch (error) {
     return false;
   }

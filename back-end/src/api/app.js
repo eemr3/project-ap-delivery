@@ -8,7 +8,9 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/login', routes.LoginRouter);
+
 app.use('/products', routes.ProductRouter);
+app.use('/register', routes.RegisterRouter);
 
 app.use(handleError);
 module.exports = app;

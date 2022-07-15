@@ -2,6 +2,9 @@ require("mocha");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
+const sinon = require("sinon");
+
+const { User } = require("../../database/models");
 
 const app = require("../../api/app");
 
@@ -15,13 +18,23 @@ describe("Rota de Login", () => {
         email: 'zebirita@email.com',
         password: '$#zebirita#$'
       });
+
       expect(response).to.have.status(200);
+
       expect(response.body.user).to.have.property("name");
       expect(response.body.user).to.have.property("email");
       expect(response.body.user).to.have.property("role");
+
+      expect(response.body).to.have.property("user");
+      expect(response.body.user).to.be.deep.eq({
+        "name": "john doe tester",
+        "email": "johndoe@test.com",
+        "role": "customer"
+      });
+
       expect(response.body).to.have.property("hasToken");
 
-      expect(response.body).to.not.have.property("password");
+      expect(response.body.user).to.not.have.property("password");
     });
 
     it("Testa erro da requisição com email incorreto", async () => {
@@ -36,6 +49,13 @@ describe("Rota de Login", () => {
     });
 
     it("Testa erro da requisição com senha inválidos", async () => {
+      sinon.stub(User, "findOne").resolves({
+        "name": "john doe tester",
+        "email": "johndoe@test.com",
+        "role": "customer",
+        "password": "e10adc3949ba59abbe56e057f20f883e"
+      });
+
       const response = await chai.request(app).post("/login").send({
         email: "johndoe@test.com",
         password: "teste22",
@@ -44,6 +64,8 @@ describe("Rota de Login", () => {
       expect(response.statusCode).to.be.equal(409);
       expect(response.body).to.have.property('message');
       expect(response.body.message).to.equal('E-mail or password incorrect');
+
+      User.findOne.restore();
     });
     
     it("Testa erro da requisição sem a propriedade email", async () => {
