@@ -23,7 +23,7 @@ const createRegister = async (userInfo) => {
   if (!createdUser) throw ErrorBase(500, 'Internal server error');
 
   return {
-    user,
+    user: createdUser,
     hasToken,
   };
 };
