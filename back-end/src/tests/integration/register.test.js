@@ -2,7 +2,6 @@ require("mocha");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
-const sinon = require("sinon");
 
 const { User } = require('../../database/models')
 
@@ -15,13 +14,6 @@ describe("Rota de Registro", () => {
   describe('metodo "POST"', () => {
     
     it("testa se é possivel registrar um usuário novo com sucesso", async () => {
-      sinon.stub(User, "create").resolves({
-        "id": 9,
-        "name": "john doe tester",
-        "email": "johndoe@test.com",
-        "password": "e10adc3949ba59abbe56e057f20f883e"
-      });
-
       const response = await chai.request(app).post("/register").send({
         name: 'john doe tester',
         email: 'johndoe@test.com',
@@ -33,13 +25,9 @@ describe("Rota de Registro", () => {
       expect(response.body).to.have.property("name");
       expect(response.body).to.have.property("email");
       // expect(response.body).to.have.property("role");
-      
-      User.create.restore();
     });
 
     it("testa se é possivel registrar um usuário novo sem sucesso", async () => {
-      sinon.stub(User, "create").resolves(null);
-
       const response = await chai.request(app).post("/register").send({
         name: 'john doe tester',
         email: 'johndoe@test.com',
@@ -48,8 +36,6 @@ describe("Rota de Registro", () => {
 
       expect(response).to.have.status(500);
       expect(response.body.message).to.eq("Internal server error");
-      
-      User.create.restore();
     });
 
 
