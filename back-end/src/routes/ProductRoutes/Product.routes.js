@@ -3,7 +3,7 @@ const rescue = require('express-rescue');
 const ProductController = require('../../controller/Product.contoller');
 const validateJoi = require('../../middlewares/validateJoi');
 const { validProduct } = require('../../schemas/validateProduct');
-const { authMiddleware } = require('../../middlewares/authMIddleware');
+const { authMiddleware } = require('../../middlewares/authMiddleware');
 
 const routes = express.Router();
 
