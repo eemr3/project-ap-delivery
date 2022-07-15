@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   font-family: sans-serif;
+  font-kerning: normal;
   height: 100vh;
   justify-content: center;
   width: 100%;
@@ -14,6 +15,7 @@
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
+  font-kerning: normal;
   font-size: 3em;
   font-weight: 900;
 }

@@ -1,0 +1,26 @@
+.register-page {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+form > .btn-register {
+  background-color: white;
+  border: none;
+  border-radius: 2px;
+  color: rgb(24, 24, 24);
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 8px;
+  width: 100%;
+}
+
+form > .btn-register:disabled {
+  background-color: black;
+  color: white;
+  cursor: not-allowed;
+}
