@@ -14,8 +14,13 @@ const notFound = {
 };
 
 const conflict = {
-  status: 409,
+  status: 404,
   message: 'E-mail or password incorrect',
+};
+
+const already = {
+  status: 409,
+  message: 'User already exists',
 };
 
 module.exports = {
@@ -23,4 +28,5 @@ module.exports = {
   unauthorized,
   notFound,
   conflict,
+  already,
 };

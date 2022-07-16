@@ -24,7 +24,7 @@ function Register() {
     try {
       const endpoint = '/register';
       const role = 'customer';
-      await requestLogin(endpoint, { name, email, password, role });
+      const response = await requestLogin(endpoint, { name, email, password });
       localStorage.setItem('user', JSON.stringify(
         { name, email, role, token: response.hasToken },
       ));
