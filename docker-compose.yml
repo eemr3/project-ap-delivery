@@ -1,12 +1,10 @@
-version: '3.9'
-
+version: '3'
 services:
   frontend:
-    build: ./frontend
-    container_name: app-delivery_front
+    build: ./fron-tend
     ports:
       - 3000:3000
-    platform: linux/x86_64
+    working_dir: /app-frontend
     depends_on:
       backend:
         condition: service_healthy
@@ -15,15 +13,14 @@ services:
       timeout: 10s
       retries: 5
   backend:
-    build: ./backend
-    platform: linux/x86_64
-    restart: 'always'
-    container_name: app-delivery_back
+    container_name: app_backend
+    build: ./back-end
     ports:
       - 3001:3001
+    working_dir: /app-backend
     command: npm run dev
-    volumes:
-      - './backend/src:/app/src'
+    volumes: 
+      - ./back-end/src:/app-backend/src
     depends_on:
       db:
         condition: service_healthy
@@ -31,21 +28,21 @@ services:
       - PORT=3001
       - DB_USER=root
       - DB_PASS=password
-      - DB_HOST=app-delivery_db
-      - DB_NAME=app-delivery_db
+      - DB_HOST=db
       - DB_PORT=3306
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"]
       timeout: 10s
       retries: 5
   db:
-    image: mysql:8.0.21
-    platform: linux/x86_64 
-    container_name: app-delivery_db
+    image: mysql:8.0.29
+    container_name: db
+    platform: linux/x86_64
     ports:
-      - 3306:3306
+      - 3002:3306
     environment:
       - MYSQL_ROOT_PASSWORD=password
+    command: --default-authentication-plugin=mysql_native_password
     restart: 'always'
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
@@ -56,4 +53,4 @@ services:
 
 networks:
   default:
-    name: app-delivery_net
+    name: app_net
