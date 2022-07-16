@@ -18,9 +18,15 @@ const conflict = {
   message: 'E-mail or password incorrect',
 };
 
+const already = {
+  status: 409,
+  message: 'User already exists',
+};
+
 module.exports = {
   badRequest,
   unauthorized,
   notFound,
   conflict,
+  already,
 };
