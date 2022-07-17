@@ -3,6 +3,7 @@ const { unauthorized } = require('../util/messageError');
 
 const createProduct = async (req, res) => {
   const { role } = req.data;
+
   if (role === 'administrator') {
     const product = await ProductService.createProduct(req.body);
     return res.status(201).json(product);
@@ -23,34 +24,44 @@ const getByIdProduct = async (req, res) => {
   return res.status(200).json(product);
 };
 
-const getByNameProduct = async (req, res) => {
-  const { name } = req.body;
-  const product = await ProductService.getAllProducts(name);
+// comentado por que não esta sendo usado na rota @carlos
+// const getByNameProduct = async (req, res) => {
+//   const { name } = req.body;
+//   const product = await ProductService.getAllProducts(name);
   
-  return res.status(200).json(product);
-};
+//   return res.status(200).json(product);
+// };
 
 const updateProduct = async (req, res) => {
+  const { role } = req.data;
   const { id } = req.params;
   const { body } = req;
   
-  await ProductService.updateProduct(id, body);
-  
-  return res.status(200).json({ id, ...body });
+  if (role === 'administrator') {
+    await ProductService.updateProduct(id, body);
+    return res.status(200).json({ id, ...body });
+  }
+
+  return res.status(unauthorized.status).json({ message: unauthorized.message });
 };
 
 const deleteProduct = async (req, res) => {
+  const { role } = req.data;
   const { id } = req.params;
-  await ProductService.deletProduct(id);
 
-  return res.status(200).json({ message: 'Deleted' });
+  if (role === 'administrator') {
+    await ProductService.deleteProduct(id);
+    return res.status(200).json({ message: 'Deleted' });
+  }
+
+  return res.status(unauthorized.status).json({ message: unauthorized.message });
 };
 
 module.exports = {
   createProduct,
   getAllProducts,
   getByIdProduct,
-  getByNameProduct,
+  // getByNameProduct,
   updateProduct,
   deleteProduct,
 };
