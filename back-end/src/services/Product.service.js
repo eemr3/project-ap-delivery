@@ -1,17 +1,18 @@
 const { Product } = require('../database/models');
 const ErrorBase = require('../util/errorBase');
-const { notFound, conflict } = require('../util/messageError');
+const { notFound, productConflict } = require('../util/messageError');
 
 const getByNameProduct = async (name) => {
-  const product = Product.findOne({ where: { name } });
-  if (!product) throw ErrorBase(notFound.status, notFound.message);
+  const product = await Product.findOne({ where: { name } });
+  // não entendi a lógica dessa linha @carlos
+  // if (!product) throw ErrorBase(notFound.status, notFound.message);
   return product;
 };
 
 const createProduct = async (body) => {
   const productExist = await getByNameProduct(body.name);
   
-  if (productExist) throw ErrorBase(conflict.status, conflict.message); 
+  if (productExist) throw ErrorBase(productConflict.status, productConflict.message); 
   
   const product = await Product.create(body);
 
@@ -42,7 +43,7 @@ const updateProduct = async (id, body) => {
   if (!ok) throw ErrorBase(500, 'Internal error');
 };
 
-const deletProduct = async (id) => {
+const deleteProduct = async (id) => {
   const productExist = await getByIdProduct(id);
 
   if (!productExist) throw ErrorBase(notFound.status, notFound.message);
@@ -58,5 +59,5 @@ module.exports = {
   getByNameProduct,
   getByIdProduct,
   updateProduct,
-  deletProduct,
+  deleteProduct,
 };
