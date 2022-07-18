@@ -1,25 +1,37 @@
-const { Sale } = require('../database/models');
+const { Sale, SaleProduct } = require('../database/models');
 
-const createSales = async (sale) => {
-    const {totalPrice, deliveryAddress, deliveryNumber} = sale;
-
-    const sales = {
-        totalPrice,
-        deliveryAddress,
-        deliveryNumber
-    };
-
-    const createdSales = await Sale.create({
-        ...sales,
+const relateProducts = async (products, saleId) => {
+  const promises = products.map(({ id, quantity }) => (
+    SaleProduct.create({
+      saleId,
+      productId: id,
+      quantity,
     })
+  ));
 
-    if (!createSales) throw ErrorBase(500,'Internal server error');
+  await Promise.all(promises);
+};
 
-    return {
-        sales,
-    };
+const createSale = async (saleInfo) => {
+  const { userId, products, sellerId, deliveryAddress, deliveryNumber, totalPrice } = saleInfo;
+  const INITIAL_STATUS = 'Pendente';
+
+  const sale = {
+    userId,
+    sellerId,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    status: INITIAL_STATUS,
+  };
+
+  const createdSale = await Sale.create(sale);
+
+  await relateProducts(products, createdSale.id);
+
+  return createdSale;
 };
 
 module.exports = {
-    createSales,
+  createSale,
 };
