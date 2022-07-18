@@ -33,10 +33,9 @@ describe("Rota de Registro", () => {
         password: '123456'
       });
 
-      expect(response).to.have.status(500);
-      expect(response.body.message).to.equal("Internal server error");
+      expect(response).to.have.status(409);
+      expect(response.body.message).to.equal("User already exists");
     });
-
 
     it("Testa erro da requisição com email inválido", async () => {
       const response = await chai.request(app).post("/register").send({

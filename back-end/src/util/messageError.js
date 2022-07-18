@@ -18,9 +18,21 @@ const conflict = {
   message: 'E-mail or password incorrect',
 };
 
+const productConflict = {
+  status: 409,
+  message: 'Product with this name already exists',
+};
+
+const already = {
+  status: 409,
+  message: 'User already exists',
+};
+
 module.exports = {
   badRequest,
   unauthorized,
   notFound,
   conflict,
+  already,
+  productConflict,
 };
