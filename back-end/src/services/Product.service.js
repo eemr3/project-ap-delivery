@@ -50,7 +50,15 @@ const deletProduct = async (id) => {
   const ok = await Product.destroy({ where: { id } });
 
   if (!ok) throw ErrorBase(500, 'Internal error');
-}; 
+};
+
+const validateProducts = async (products) => {
+  const promises = products.map(({ id }) => getByIdProduct(id));
+
+  const productsData = await Promise.all(promises);
+
+  return productsData.some((p) => p);
+};
 
 module.exports = {
   createProduct,
@@ -59,4 +67,5 @@ module.exports = {
   getByIdProduct,
   updateProduct,
   deletProduct,
+  validateProducts,
 };
