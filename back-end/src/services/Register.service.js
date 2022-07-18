@@ -13,7 +13,6 @@ const createRegister = async (userInfo) => {
     role: 'customer',
   };
 
-  const hasToken = await createdToken(user);
   const encryptedPassword = md5(password);
   const userExist = await User.findOne({ where: { email } });
   
