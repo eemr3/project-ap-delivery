@@ -1,7 +1,6 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 const ErrorBase = require('../util/errorBase');
-const { createdToken } = require('../auth/token');
 const { already } = require('../util/messageError');
 
 const createRegister = async (userInfo) => {

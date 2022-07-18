@@ -8,6 +8,5 @@ const { authMiddleware } = require('../../middlewares/authMiddleware');
 const routes = express.Router();
 
 routes.post('/', validateJoi(validRegister), rescue(RegisterController.createRegister));
-routes.delete('/', authMiddleware,rescue(RegisterController.deleteRegister));
 
 module.exports = routes;
