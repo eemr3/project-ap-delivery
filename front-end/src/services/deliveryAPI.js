@@ -14,4 +14,18 @@ export const getProducts = async () => {
   return data;
 };
 
+export const getSellers = async () => {
+  const { data } = await api.get('/checkout');
+  return data;
+};
+
+export const createSale = async ({ data, token }) => {
+  const response = await api.post('/checkout', data, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return response;
+};
+
 export default api;
