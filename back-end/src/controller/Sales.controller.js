@@ -1,12 +1,22 @@
-const SalesService = require('../services/Register.service');
+const SalesService = require('../services/Sales.service');
+const ProductService = require('../services/Product.service');
 
-const createSales = async (req, res) => {
-    const sale = req.body;
-    const createdSales = await SalesService.createSales(sale);
+const createSale = async (req, res) => {
+  req.body.userId = req.data.id;
+  const createdSales = await SalesService.createSale(req.body);
 
-    return res.status(201).json(createdSales);
+  return res.status(201).json(createdSales);
+};
+
+const validateProducts = async (req, res, next) => {
+  const { products } = req.body;
+
+  await ProductService.validateProducts(products);
+
+  next();
 };
 
 module.exports = {
-    createSales,
+  createSale,
+  validateProducts,
 };
