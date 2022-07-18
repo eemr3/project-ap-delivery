@@ -1,0 +1,44 @@
+.card-product {
+  align-items: center;
+  background-color: #c5c2c233;
+  border-color: black;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 250px;
+}
+
+.card-image {
+  border-radius: 5px;
+  height: 15rem;
+}
+
+.counter {
+  flex-direction: row;
+}
+
+.card-product .counter input {
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  height: 30px;
+  margin: 5px;
+  text-align: center;
+  width: 50px;
+}
+
+.card-product .counter button {
+  background-color: rgb(29, 233, 152);
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  font-size: large;
+  height: 30px;
+  width: 40px;
+}
+
+.card-product .counter button:active {
+  box-shadow: none;
+}
