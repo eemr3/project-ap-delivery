@@ -1,7 +1,7 @@
 const express = require('express');
 const rescue = require('express-rescue');
 const validateJoi = require('../../middlewares/validateJoi');
-const { validSales } = require('../../schemas/validateSales');
+const { validSales, validStatus } = require('../../schemas/validateSales');
 const SalesController = require('../../controller/Sales.controller');
 const { authMiddleware } = require('../../middlewares/authMiddleware');
 
@@ -16,7 +16,7 @@ routes.get(
 routes.get(
   '/user',
   authMiddleware,
-  rescue(SalesController.getAllFromCustomer),
+  rescue(SalesController.getAllByUser),
 );
 
 routes.get(
@@ -28,7 +28,7 @@ routes.get(
 routes.patch(
   '/:id',
   authMiddleware,
-  validateJoi(validSales),
+  validateJoi(validStatus),
   rescue(SalesController.patchStatus),
 );
 
