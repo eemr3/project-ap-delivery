@@ -1,4 +1,4 @@
-const { Sale, SaleProduct } = require('../database/models');
+const { Sale, SaleProduct, User } = require('../database/models');
 
 const getAll = async () => {
   const sales = await Sale.findAll();
@@ -6,7 +6,7 @@ const getAll = async () => {
   return sales;
 };
 
-const getAllFromCustomer = async (userId) => {
+const getAllByUser = async (userId) => {
   const sales = await Sale.findAll({ where: { userId } });
 
   return sales;
@@ -41,6 +41,8 @@ const createSale = async (saleInfo) => {
   const { userId, products, sellerId, deliveryAddress, deliveryNumber, totalPrice } = saleInfo;
   const INITIAL_STATUS = 'Pendente';
 
+  await User.findOne({ where: { id: sellerId } });
+
   const sale = {
     userId,
     sellerId,
@@ -59,7 +61,7 @@ const createSale = async (saleInfo) => {
 
 module.exports = {
   getAll,
-  getAllFromCustomer,
+  getAllByUser,
   getById,
   patchStatus,
   createSale,
