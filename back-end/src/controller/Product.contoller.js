@@ -24,14 +24,6 @@ const getByIdProduct = async (req, res) => {
   return res.status(200).json(product);
 };
 
-// comentado por que não esta sendo usado na rota @carlos
-// const getByNameProduct = async (req, res) => {
-//   const { name } = req.body;
-//   const product = await ProductService.getAllProducts(name);
-  
-//   return res.status(200).json(product);
-// };
-
 const updateProduct = async (req, res) => {
   const { role } = req.data;
   const { id } = req.params;
