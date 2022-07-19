@@ -8,6 +8,8 @@ const { adminMiddleware } = require('../../middlewares/adminMiddleware');
 
 const routes = express.Router();
 
+//  rotas de /register
+
 routes.post('/', validateJoi(validRegister), rescue(RegisterController.createRegister));
 routes.delete('/:id', authMiddleware, adminMiddleware, rescue(RegisterController.deleteRegister));
 
