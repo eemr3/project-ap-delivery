@@ -1,6 +1,7 @@
 require("mocha");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
+const { set } = require("../../api/app");
 const expect = chai.expect;
 
 const app = require("../../api/app");
@@ -8,6 +9,26 @@ const app = require("../../api/app");
 chai.use(chaiHttp);
 
 describe("Rota de Registro", () => {
+  let administratorToken;
+  let customerToken;
+
+  it('consegue logar como vendedor', async () => {
+    const response = await chai.request(app).post("/login").send({
+      email: 'adm@deliveryapp.com',
+      password: '--adm2@21!!--'
+    });
+
+    administratorToken = response.body.hasToken;
+  });
+
+  it('consegue logar como customer', async () => {
+    const response = await chai.request(app).post("/login").send({
+      email: 'zebirita@email.com',
+      password: '$#zebirita#$'
+    });
+
+    customerToken = response.body.hasToken;
+  });
   
   describe('metodo "POST"', () => {
     
@@ -15,7 +36,8 @@ describe("Rota de Registro", () => {
       const response = await chai.request(app).post("/register").send({
         name: 'john doe tester',
         email: 'johndoe@test.com',
-        password: '123456'
+        password: '123456',
+        role: 'customer'
       });
       
       expect(response).to.have.status(201);
@@ -30,7 +52,8 @@ describe("Rota de Registro", () => {
       const response = await chai.request(app).post("/register").send({
         name: 'john doe tester',
         email: 'johndoe@test.com',
-        password: '123456'
+        password: '123456',
+        role: 'customer',
       });
 
       expect(response).to.have.status(409);
@@ -104,6 +127,62 @@ describe("Rota de Registro", () => {
       expect(response.status).to.be.equal(400);
       expect(response.body).to.have.property('message');
       expect(response.body.message).to.equal('\"password\" is required');
+    });
+
+    it("Testa erro da requisição sem a propriedade role", async () => {
+      const response = await chai.request(app).post("/register").send({
+        name: 'john doe tester',
+        email: 'johndoe@gmail.com',
+        password: '123456',
+      });      
+      
+      expect(response.status).to.be.equal(400);
+      expect(response.body).to.have.property('message');
+      expect(response.body.message).to.equal('\"role\" is required');
+    });
+
+    it("Testa erro da requisição com a propriedade role em number", async () => {
+      const response = await chai.request(app).post("/register").send({
+        name: 'john doe tester',
+        email: 'johndoe@gmail.com',
+        password: '123456',
+        role: 12
+      });      
+      
+      expect(response.status).to.be.equal(400);
+      expect(response.body).to.have.property('message');
+      expect(response.body.message).to.equal('\"role\" must be a string');
+    });
+  });
+
+  describe('método DELETE', async () => {
+    it("testa se é possivel deletar um usuário com sucesso", async () => {
+      const response = await chai.request(app)
+      .delete("/register/4")
+      .set("Authorization", administratorToken);
+      
+      expect(response).to.have.status(200);
+      expect(response.body.message).to.eq('User deleted')
+    });
+
+    it("testa se não é possivel deletar um usuário não existente", async () => {
+      const response = await chai.request(app)
+      .delete("/register/25")
+      .set("Authorization", administratorToken);
+
+      console.log(response.body);
+      
+      expect(response).to.have.status(404);
+      expect(response.body.message).to.eq('User not found')
+    });
+
+    it("testa se é possivel deletar um usuário sem sucesso como customer", async () => {
+      const response = await chai.request(app)
+      .delete("/register/1")
+      .set("Authorization", customerToken);
+      
+      expect(response).to.have.status(401);
+      expect(response.body.message).to.eq('Unauthorized');
     });
   });
 });
