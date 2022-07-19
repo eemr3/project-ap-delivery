@@ -27,6 +27,19 @@ const createRegister = async (userInfo) => {
   };
 };
 
+const deleteRegister = async (id) => {
+  const user = await User.findByPk(id);
+
+  if (!user) throw ErrorBase(404, 'User not found');
+
+  await user.destroy();
+
+  return {
+    message: 'User deleted',
+  };
+};
+
 module.exports = {
   createRegister,
+  deleteRegister,
 };
