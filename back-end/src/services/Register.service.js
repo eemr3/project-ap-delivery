@@ -2,28 +2,30 @@ const md5 = require('md5');
 const { User } = require('../database/models');
 const ErrorBase = require('../util/errorBase');
 const { already } = require('../util/messageError');
+const { createdToken } = require('../auth/token');
 
 const createRegister = async (userInfo) => {
-  const { password, email, name } = userInfo;
-
-  const user = {
-    name,
-    email,
-    role: 'customer',
-  };
-
+  const { email, password } = userInfo;
   const encryptedPassword = md5(password);
   const userExist = await User.findOne({ where: { email } });
   
   if (userExist) throw ErrorBase(already.status, already.message);
 
-  const createdUser = await User.create({
-    ...user,
+  const { id, name, role } = await User.create({
+    ...userInfo,
     password: encryptedPassword,
   });
 
+  const hasToken = await createdToken({ id, name, email, role });
+
   return {
-    ...createdUser,
+    user: {
+      id,
+      name,
+      email,
+      role,
+    },
+    hasToken,
   };
 };
 
