@@ -7,6 +7,14 @@ const createRegister = async (req, res) => {
     return res.status(201).json(createdUser);
 };
 
+const deleteRegister = async (req, res) => {
+    const id = req.params.id;
+    const deletedUser = await RegisterService.deleteRegister(id);
+
+    return res.status(200).json(deletedUser);
+};
+
 module.exports = {
     createRegister,
+    deleteRegister,
 };
