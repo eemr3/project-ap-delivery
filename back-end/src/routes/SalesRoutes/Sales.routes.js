@@ -7,6 +7,31 @@ const { authMiddleware } = require('../../middlewares/authMiddleware');
 
 const routes = express.Router();
 
+routes.get(
+  '/',
+  authMiddleware,
+  rescue(SalesController.getAll),
+);
+
+routes.get(
+  '/user',
+  authMiddleware,
+  rescue(SalesController.getAllFromCustomer),
+);
+
+routes.get(
+  '/:id',
+  authMiddleware,
+  rescue(SalesController.getById),
+);
+
+routes.patch(
+  '/:id',
+  authMiddleware,
+  validateJoi(validSales),
+  rescue(SalesController.patchStatus),
+);
+
 routes.post(
   '/',
   authMiddleware,
