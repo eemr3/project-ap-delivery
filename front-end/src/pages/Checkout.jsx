@@ -49,7 +49,7 @@ function Checkout() {
   return (
     <main>
       <Navbar />
-      <h1 className=''>Finalizar pedido</h1>
+      <h1>Finalizar pedido</h1>
       <table border="1">
         <tr>
           <th>Item</th>
