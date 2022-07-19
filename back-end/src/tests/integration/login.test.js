@@ -5,6 +5,7 @@ const expect = chai.expect;
 
 const { User } = require("../../database/models");
 
+
 const app = require("../../api/app");
 
 chai.use(chaiHttp);
@@ -41,18 +42,18 @@ describe("Rota de Login", () => {
         password: "123456",
       });
 
-      expect(response.statusCode).to.be.equal(404);
+      expect(response.status).to.be.equal(404);
       expect(response.body).to.have.property("message");
       expect(response.body.message).to.equal("E-mail or password incorrect");
     });
 
     it("Testa erro da requisição com senha inválidos", async () => {
       const response = await chai.request(app).post("/login").send({
-        email: "johndoe@test.com",
+        email: "zebirita@email.com",
         password: "teste22",
       });
 
-      expect(response.statusCode).to.be.equal(404);
+      expect(response.status).to.be.equal(404);
       expect(response.body).to.have.property("message");
       expect(response.body.message).to.equal("E-mail or password incorrect");
     });
@@ -73,7 +74,7 @@ describe("Rota de Login", () => {
         password: "alllll@jjjjjj.com",
       });
 
-      expect(response.statusCode).to.be.equal(400);
+      expect(response.status).to.be.equal(400);
       expect(response.body).to.have.property("message");
       expect(response.body.message).to.equal('"email" must be a string');
     });
@@ -83,7 +84,7 @@ describe("Rota de Login", () => {
         email: "johndotest.com",
         password: "123456",
       });
-      expect(response.statusCode).to.be.equal(400);
+      expect(response.status).to.be.equal(400);
       expect(response.body).to.have.property("message");
       expect(response.body.message).to.equal('"email" must be a valid email');
     });
@@ -92,7 +93,7 @@ describe("Rota de Login", () => {
       const response = await chai.request(app).post("/login").send({
         email: "teste@teste.com",
       });
-      expect(response.statusCode).to.be.equal(400);
+      expect(response.status).to.be.equal(400);
       expect(response.body).to.have.property("message");
       expect(response.body.message).to.equal('"password" is required');
     });

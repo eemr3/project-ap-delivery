@@ -3,8 +3,6 @@ const chai = require("chai");
 const chaiHttp = require("chai-http");
 const expect = chai.expect;
 
-const { User } = require('../../database/models')
-
 const app = require("../../api/app");
 
 chai.use(chaiHttp);
@@ -21,10 +19,11 @@ describe("Rota de Registro", () => {
       });
       
       expect(response).to.have.status(201);
-      expect(response.body).to.have.property("id");
-      expect(response.body).to.have.property("name");
-      expect(response.body).to.have.property("email");
-      // expect(response.body).to.have.property("role");
+      expect(response.body.user).to.have.property("id");
+      expect(response.body.user).to.have.property("name");
+      expect(response.body.user).to.have.property("email");
+      expect(response.body.user).to.have.property("role");
+      expect(response.body).to.have.property("hasToken");
     });
 
     it("testa se é possivel registrar um usuário novo sem sucesso", async () => {
@@ -34,10 +33,9 @@ describe("Rota de Registro", () => {
         password: '123456'
       });
 
-      expect(response).to.have.status(500);
-      expect(response.body.message).to.eq("Internal server error");
+      expect(response).to.have.status(409);
+      expect(response.body.message).to.equal("User already exists");
     });
-
 
     it("Testa erro da requisição com email inválido", async () => {
       const response = await chai.request(app).post("/register").send({
