@@ -6,13 +6,16 @@ const { createdToken } = require('../auth/token');
 
 const createRegister = async (userInfo) => {
   const { email, password } = userInfo;
+
   const encryptedPassword = md5(password);
+
   const userExist = await User.findOne({ where: { email } });
-  
+
   if (userExist) throw ErrorBase(already.status, already.message);
 
   const { id, name, role } = await User.create({
     ...userInfo,
+    role: userInfo.role || 'customer',
     password: encryptedPassword,
   });
 
@@ -20,7 +23,6 @@ const createRegister = async (userInfo) => {
 
   return {
     user: {
-      id,
       name,
       email,
       role,
