@@ -14,10 +14,10 @@ const getAll = async (req, res) => {
   res.status(200).send(sales);
 };
 
-const getAllFromCustomer = async (req, res) => {
+const getAllByUser = async (req, res) => {
   const user = req.data;
 
-  const sales = await SalesService.getAllFromCustomer(user.id);
+  const sales = await SalesService.getAllByUser(user.id);
 
   res.status(200).send(sales);
 };
@@ -46,6 +46,7 @@ const patchStatus = async (req, res) => {
 
 const createSale = async (req, res) => {
   req.body.userId = req.data.id;
+
   const createdSales = await SalesService.createSale(req.body);
 
   return res.status(201).json(createdSales);
@@ -61,7 +62,7 @@ const validateProducts = async (req, res, next) => {
 
 module.exports = {
   getAll,
-  getAllFromCustomer,
+  getAllByUser,
   getById,
   patchStatus,
   createSale,
