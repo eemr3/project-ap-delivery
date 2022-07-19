@@ -10,6 +10,11 @@ const validSales = Joi.object({
     totalPrice: Joi.number().required(),
 });
 
+const validStatus = Joi.object({
+  status: Joi.string().required(),
+});
+
 module.exports = {
   validSales,
+  validStatus,
 };
