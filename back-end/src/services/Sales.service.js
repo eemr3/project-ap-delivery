@@ -1,5 +1,30 @@
 const { Sale, SaleProduct } = require('../database/models');
 
+const getAll = async () => {
+  const sales = await Sale.findAll();
+
+  return sales;
+};
+
+const getAllFromCustomer = async (userId) => {
+  const sales = await Sale.findAll({ where: { userId } });
+
+  return sales;
+};
+
+const getById = async (id) => {
+  const sale = await Sale.findOne({ where: { id } });
+
+  return sale;
+};
+
+const patchStatus = async (status, id) => {
+  await Sale.update(
+    { status },
+    { where: { id } },
+  );
+};
+
 const relateProducts = async (products, saleId) => {
   const promises = products.map(({ id, quantity }) => (
     SaleProduct.create({
@@ -33,5 +58,9 @@ const createSale = async (saleInfo) => {
 };
 
 module.exports = {
+  getAll,
+  getAllFromCustomer,
+  getById,
+  patchStatus,
   createSale,
 };
