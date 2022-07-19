@@ -15,6 +15,6 @@ const deleteRegister = async (req, res) => {
 };
 
 module.exports = {
-    createRegister,
-    deleteRegister,
+  createRegister,
+  deleteRegister,
 };
