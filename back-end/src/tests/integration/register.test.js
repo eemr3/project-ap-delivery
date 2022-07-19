@@ -41,7 +41,6 @@ describe("Rota de Registro", () => {
       });
       
       expect(response).to.have.status(201);
-      expect(response.body.user).to.have.property("id");
       expect(response.body.user).to.have.property("name");
       expect(response.body.user).to.have.property("email");
       expect(response.body.user).to.have.property("role");
@@ -127,31 +126,6 @@ describe("Rota de Registro", () => {
       expect(response.status).to.be.equal(400);
       expect(response.body).to.have.property('message');
       expect(response.body.message).to.equal('\"password\" is required');
-    });
-
-    it("Testa erro da requisição sem a propriedade role", async () => {
-      const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe@gmail.com',
-        password: '123456',
-      });      
-      
-      expect(response.status).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal('\"role\" is required');
-    });
-
-    it("Testa erro da requisição com a propriedade role em number", async () => {
-      const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe@gmail.com',
-        password: '123456',
-        role: 12
-      });      
-      
-      expect(response.status).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal('\"role\" must be a string');
     });
   });
 
