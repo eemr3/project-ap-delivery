@@ -8,5 +8,5 @@ const createRegister = async (req, res) => {
 };
 
 module.exports = {
-    createRegister,
+  createRegister,
 };
