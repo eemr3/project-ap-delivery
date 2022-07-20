@@ -10,10 +10,12 @@ export const requestLogin = async (endpoint, body) => {
 };
 
 export const getProducts = async () => {
+
   const { token } = JSON.parse(localStorage.getItem('user'));
   const { data } = await api.get('/products', {
     headers: { Authorization: token },
   });
+
   return data;
 };
 
