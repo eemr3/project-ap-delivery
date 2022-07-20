@@ -1,0 +1,67 @@
+.header {
+  background-color: white;
+  border-bottom: 1px solid black;
+  display: flex;
+  height: 60px;
+  justify-content: space-between;
+  padding: 0 200px;
+}
+
+.header h2 {
+  align-items: center;
+  color: black;
+  display: flex;
+  font-kerning: normal;
+}
+
+.header nav {
+  display: flex;
+  flex-shrink: 5;
+  font-size: 16px;
+}
+
+
+.header h3 {
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 10px;
+}
+
+.header a {
+  align-items: center;
+  box-sizing: border-box;
+  color: grey;
+  display: flex;
+  justify-content: center;
+  min-width: 100px;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+.exit-btn {
+  background-color: white;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  width: 100px;
+}
+
+.cart-btn {
+  background-color: white;
+  border: 1px rgb(25, 25, 42);
+  border-style: solid;
+  bottom: 20px;
+  color: rgb(25, 25, 42);
+  font-size: 15px;
+  padding: 20px;
+  position: fixed;
+  right: 20px;
+}
+
+.products-section {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, 300px);
+  justify-content: center;
+}

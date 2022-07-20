@@ -21,7 +21,6 @@ function Login() {
 
   useEffect(() => {
     const redirect = (user) => {
-      console.log(user);
       switch (user.role) {
       case 'administrator':
         navigate.push(ROUTE_ADMIN_MANAGE);
@@ -45,8 +44,10 @@ function Login() {
     try {
       const endpoint = '/login';
       const response = await requestLogin(endpoint, { email, password });
-      const { user, hasToken } = response;
-      localStorage.setItem('user', JSON.stringify({ ...user, token: hasToken }));
+      console.log(response.user);
+
+      const { user } = response;
+      localStorage.setItem('user', JSON.stringify({ ...user, token: response.hasToken }));
 
       switch (user.role) {
       case 'administrator':

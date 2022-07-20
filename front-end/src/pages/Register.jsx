@@ -24,11 +24,12 @@ function Register() {
     try {
       const endpoint = '/register';
       const role = 'customer';
-      const response = await requestLogin(endpoint, { name, email, password });
+      const response = await requestLogin(endpoint, { name, email, password, role });
+      console.log(response);
       localStorage.setItem('user', JSON.stringify(
-        { name, email, role, token: response.hasToken },
+        { ...response.dataValues, token: response.token },
       ));
-      navigate.push('/customer/products');
+      navigate('../customer/products');
       setViewError(false);
     } catch (error) {
       console.log(error);

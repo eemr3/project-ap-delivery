@@ -5,11 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.DECIMAL,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATEONLY,
+    saleDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
     status: DataTypes.STRING
   }, {
     underscored: true,
-    tableName: 'users',
+    tableName: 'sales',
     timestamps: false
   });
 
