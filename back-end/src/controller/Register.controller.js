@@ -14,7 +14,14 @@ const deleteRegister = async (req, res) => {
     return res.status(200).json(deletedUser);
 };
 
+const getAllUsers = async (req, res) => {
+  const users = await RegisterService.getAllUsers();
+
+  return res.status(200).json(users);
+};
+
 module.exports = {
   createRegister,
   deleteRegister,
+  getAllUsers,
 };
