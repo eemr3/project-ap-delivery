@@ -21,16 +21,15 @@ function Login() {
 
   useEffect(() => {
     const redirect = (user) => {
-      console.log(user);
       switch (user.role) {
       case 'administrator':
-        navigate.push(ROUTE_ADMIN_MANAGE);
+        navigate(ROUTE_ADMIN_MANAGE);
         break;
       case 'seller':
-        navigate.push(ROUTE_SELLER_ORDERS);
+        navigate(ROUTE_SELLER_ORDERS);
         break;
       default:
-        navigate.push(ROUTE_CUSTOMER_PRODUCTS);
+        navigate(ROUTE_CUSTOMER_PRODUCTS);
         break;
       }
     };
@@ -45,18 +44,20 @@ function Login() {
     try {
       const endpoint = '/login';
       const response = await requestLogin(endpoint, { email, password });
-      const { user, hasToken } = response;
-      localStorage.setItem('user', JSON.stringify({ ...user, token: hasToken }));
+      console.log(response.user);
+
+      const { user } = response;
+      localStorage.setItem('user', JSON.stringify({ ...user, token: response.token }));
 
       switch (user.role) {
       case 'administrator':
-        navigate.push(ROUTE_ADMIN_MANAGE);
+        navigate(ROUTE_ADMIN_MANAGE);
         break;
       case 'seller':
-        navigate.push(ROUTE_SELLER_ORDERS);
+        navigate(ROUTE_SELLER_ORDERS);
         break;
       default:
-        navigate.push(ROUTE_CUSTOMER_PRODUCTS);
+        navigate(ROUTE_CUSTOMER_PRODUCTS);
         break;
       }
     } catch (error) {
@@ -123,7 +124,7 @@ function Login() {
             type="button"
             className="btn-redirect-register"
             data-testid="common_login__button-register"
-            onClick={ () => navigate.push('../register', { replace: true }) }
+            onClick={ () => navigate('../register', { replace: true }) }
           >
             Criar conta
           </button>
