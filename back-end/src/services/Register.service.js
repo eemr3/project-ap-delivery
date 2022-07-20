@@ -31,6 +31,11 @@ const createRegister = async (userInfo) => {
   };
 };
 
+const getAllUsers = async () => { 
+  const users = await User.findAll();
+  return users;
+};
+
 const deleteRegister = async (id) => {
   const user = await User.findByPk(id);
 
@@ -46,4 +51,5 @@ const deleteRegister = async (id) => {
 module.exports = {
   createRegister,
   deleteRegister,
+  getAllUsers,
 };
