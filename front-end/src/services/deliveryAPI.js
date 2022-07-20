@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getHeaders from '../utils';
 
 const api = axios.create({
   baseURL: `http://localhost:${process.env.REACT_APP_API_PORT || '3001'}`,
@@ -10,10 +11,7 @@ export const requestLogin = async (endpoint, body) => {
 };
 
 export const getProducts = async () => {
-  const { token } = JSON.parse(localStorage.getItem('user'));
-  const { data } = await api.get('/products', {
-    headers: { Authorization: token },
-  });
+  const { data } = await api.get('/products', getHeaders());
 
   return data;
 };
@@ -23,12 +21,8 @@ export const getSellers = async () => {
   return data;
 };
 
-export const createSale = async ({ data, token }) => {
-  const response = await api.post('/checkout', data, {
-    headers: {
-      Authorization: token,
-    },
-  });
+export const createSale = async (data) => {
+  const response = await api.post('/checkout', data, getHeaders());
   return response;
 };
 

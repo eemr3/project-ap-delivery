@@ -55,7 +55,7 @@
   color: rgb(25, 25, 42);
   font-size: 15px;
   padding: 20px;
-  position: absolute;
+  position: fixed;
   right: 20px;
 }
 
