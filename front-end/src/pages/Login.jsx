@@ -23,13 +23,13 @@ function Login() {
     const redirect = (user) => {
       switch (user.role) {
       case 'administrator':
-        navigate(ROUTE_ADMIN_MANAGE);
+        navigate.push(ROUTE_ADMIN_MANAGE);
         break;
       case 'seller':
-        navigate(ROUTE_SELLER_ORDERS);
+        navigate.push(ROUTE_SELLER_ORDERS);
         break;
       default:
-        navigate(ROUTE_CUSTOMER_PRODUCTS);
+        navigate.push(ROUTE_CUSTOMER_PRODUCTS);
         break;
       }
     };
@@ -47,17 +47,17 @@ function Login() {
       console.log(response.user);
 
       const { user } = response;
-      localStorage.setItem('user', JSON.stringify({ ...user, token: response.token }));
+      localStorage.setItem('user', JSON.stringify({ ...user, token: response.hasToken }));
 
       switch (user.role) {
       case 'administrator':
-        navigate(ROUTE_ADMIN_MANAGE);
+        navigate.push(ROUTE_ADMIN_MANAGE);
         break;
       case 'seller':
-        navigate(ROUTE_SELLER_ORDERS);
+        navigate.push(ROUTE_SELLER_ORDERS);
         break;
       default:
-        navigate(ROUTE_CUSTOMER_PRODUCTS);
+        navigate.push(ROUTE_CUSTOMER_PRODUCTS);
         break;
       }
     } catch (error) {
@@ -124,7 +124,7 @@ function Login() {
             type="button"
             className="btn-redirect-register"
             data-testid="common_login__button-register"
-            onClick={ () => navigate('../register', { replace: true }) }
+            onClick={ () => navigate.push('../register', { replace: true }) }
           >
             Criar conta
           </button>
