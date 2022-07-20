@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Login.css';
 import { useHistory } from 'react-router-dom';
 import logo from '../images/logo.png';
 import { requestLogin } from '../services/deliveryAPI';
+import styles from '../styles/Login.module.css';
 
 const validateEmail = (e) => {
   const re = /\S+@\S+\.\S+/;
@@ -70,14 +70,15 @@ function Login() {
   const six = 6;
 
   return (
-    <main className="login-page">
-      <div className="logo">
+    <main className={ styles.loginPage }>
+      <div className={ styles.logo }>
         <img src={ logo } alt="logo" />
         <h1>Entrar</h1>
       </div>
-      <form>
-        <label htmlFor="email">
+      <form className={ styles.formContainer }>
+        <label className={ styles.labelForm } htmlFor="email">
           <input
+            className={ styles.inputForm }
             type="email"
             name="email"
             id="email"
@@ -86,8 +87,9 @@ function Login() {
             data-testid="common_login__input-email"
           />
         </label>
-        <label htmlFor="password">
+        <label className={ styles.labelForm } htmlFor="password">
           <input
+            className={ styles.inputForm }
             type="password"
             name="password"
             id="password"
@@ -98,7 +100,7 @@ function Login() {
         </label>
 
         <span
-          className="msg-error"
+          className={ styles.msgError }
           data-testid="common_login__element-invalid-email"
           style={ { display: viewError ? 'block' : 'none' } }
         >
@@ -107,24 +109,24 @@ function Login() {
 
         <button
           type="submit"
-          className="btn-login"
+          className={ styles.btnLogin }
           onClick={ submitLogin }
           data-testid="common_login__button-login"
           disabled={ validateEmail(email) && (password.length >= six) ? 0 : 1 }
         >
           Continuar
         </button>
-        <div className="redirect-register-container">
+        <div className={ styles.redirectRegisterContainer }>
           <button
             type="button"
-            className="btn-register-text"
+            className={ styles.btnRegisterText }
           >
             Não possui conta?
           </button>
           <button
             type="button"
-            className="btn-redirect-register"
-            data-testid="common_login__button-register"
+            className={ styles.btnRedirectRegister }
+            data-testid={ styles.commonLogin__buttonRegister }
             onClick={ () => navigate.push('../register', { replace: true }) }
           >
             Criar conta
