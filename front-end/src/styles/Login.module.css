@@ -1,4 +1,4 @@
-.login-page {
+.loginPage {
   align-items: center;
   background-color: white;
   display: flex;
@@ -26,23 +26,23 @@
   padding-top: 20%;
 }
 
-form {
+.formContainer {
   background-color: white;
   border-color: 1px black;
   border-style: solid;
   padding: 20px;
 }
 
-form > label > input, form > button {
+.formContainer > .labelForm > .inputForm, .formContainer > button {
   box-sizing: border-box;
   display: block;
 }
 
-form > label {
+.formContainer > .labelForm {
   color: black;
 }
 
-form > label > input {
+.formContainer > .labelForm > .inputForm {
   background-color: transparent;
   border-color: 1px rgb(205, 205, 205);
   border-style: solid;
@@ -54,11 +54,11 @@ form > label > input {
   width: 350px;
 }
 
-form > label > input:focus {
+.formContainer > .labelForm > .inputForm:focus {
   outline: none;
 }
 
-form > .btn-login {
+.formContainer > .btnLogin {
   background-color: rgb(16, 118, 243);
   border: none;
   border-radius: 2px;
@@ -72,7 +72,7 @@ form > .btn-login {
   width: 100%;
 }
 
-form > .btn-login:disabled {
+.formContainer > .btnLogin:disabled {
   background-color: black;
   color: white;
   cursor: not-allowed;
@@ -83,7 +83,7 @@ hr {
   border: 1px solid white;
 }
 
-form > .redirect-register-container {
+.formContainer > .redirectRegisterContainer {
   align-content: center;
   align-items: center;
   background-color: transparent;
@@ -97,7 +97,7 @@ form > .redirect-register-container {
   margin-top: 10px;
 }
 
-form > div .btn-register-text {
+.formContainer > .redirectRegisterContainer .btnRegisterText {
   background-color: transparent;
   border: none;
   color: black;
@@ -107,7 +107,7 @@ form > div .btn-register-text {
   margin-top: 10px;
 }
 
-form > div .btn-redirect-register {
+.formContainer > .redirectRegisterContainer .btnRedirectRegister {
   background-color: transparent;
   border: none;
   color: black;
@@ -120,12 +120,12 @@ form > div .btn-redirect-register {
   margin-top: 10px;
 }
 
-form > div .btn-redirect-register:hover {
+.formContainer > .redirectRegisterContainer .btnRedirectRegister:hover {
   text-decoration: underline black;
   text-underline-offset: 3px;
 }
 
-.msg-error {
+.msgError {
   color: red;
   display: none;
   margin-top: 20px;
