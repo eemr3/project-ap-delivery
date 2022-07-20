@@ -9,10 +9,22 @@ export const requestLogin = async (endpoint, body) => {
   return data;
 };
 
+export const getAllUsers = async (endpoint) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { data } = await api.get(endpoint, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return data;
+};
+
 export const getProducts = async () => {
   const { token } = JSON.parse(localStorage.getItem('user'));
   const { data } = await api.get('/products', {
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+    },
   });
 
   return data;
