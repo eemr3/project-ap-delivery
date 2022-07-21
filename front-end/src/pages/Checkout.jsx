@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { getSellers, createSale } from '../services/deliveryAPI';
+import { clearCart } from '../utils';
 
 function Checkout() {
   const [ordered, setOrdered] = useState([]);
@@ -20,18 +21,25 @@ function Checkout() {
     });
   };
 
+  const parseProducts = () => {
+    const products = JSON.parse(localStorage.getItem('cart'));
+
+    return products.map(({ productId: id, quantity }) => ({
+      id, quantity,
+    }));
+  };
+
   const handleClick = async () => {
     const totalPrice = ordered
       .reduce((acc, crr) => acc + Number(crr.subTotal.replace(/,/, '.')), 0)
       .toFixed(2);
-    const { id, token } = JSON.parse(localStorage.getItem('user'));
-    const products = JSON.parse(localStorage.getItem('cart'));
-    const data = { ...order, totalPrice, userId: id, status: 'Pendente', products };
-    // setToken(token);
-    const result = await createSale({ data, token });
-    const { data: { id: orderId } } = result;
-    console.log(result);
-    navigate(`../customer/orders/${orderId}`);
+    const { id } = JSON.parse(localStorage.getItem('user'));
+    const products = parseProducts();
+    const data = { ...order, totalPrice, userId: id, products };
+    const result = await createSale(data);
+    const { id: orderId } = result;
+    clearCart();
+    navigate.push(`/customer/orders/${orderId}`);
   };
 
   const removeItem = (id) => {
