@@ -27,9 +27,9 @@ function Register() {
       const response = await requestLogin(endpoint, { name, email, password, role });
       console.log(response);
       localStorage.setItem('user', JSON.stringify(
-        { ...response.dataValues, token: response.token },
+        { ...response.dataValues, token: response.hasToken },
       ));
-      navigate('../customer/products');
+      navigate.push('../customer/products');
       setViewError(false);
     } catch (error) {
       console.log(error);

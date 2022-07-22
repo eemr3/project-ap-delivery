@@ -10,6 +10,8 @@ const routes = express.Router();
 
 routes.get('/', authMiddleware, adminMiddleware, RegisterController.getAllUsers);
 routes.post('/', validateJoi(validRegister), rescue(RegisterController.createRegister));
+routes.post('/admin', authMiddleware, validateJoi(validRegister),
+  rescue(RegisterController.createRegister));
 routes.delete('/:id', authMiddleware, adminMiddleware, rescue(RegisterController.deleteRegister));
 
 module.exports = routes;
