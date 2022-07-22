@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getAllUsers } from '../services/deliveryAPI';
+import { deleteUser, getAllUsers } from '../services/deliveryAPI';
 import dataTestId from '../utils/dataTestIds';
+import styles from '../styles/TableUsers.module.css';
 
 function TableUsers({ isCreated }) {
   const [userData, setUserData] = useState([]);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
     const getAllUserAD = async () => {
@@ -14,10 +16,19 @@ function TableUsers({ isCreated }) {
     };
 
     getAllUserAD();
-  }, [isCreated]);
+  }, [isCreated, isDeleted]);
+
+  const handleDeleteUser = async (id) => {
+    try {
+      await deleteUser(id);
+      setIsDeleted(!isDeleted);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <table>
+    <table className={ styles.customers }>
       <thead>
         <tr>
           <th>Item</th>
@@ -40,7 +51,12 @@ function TableUsers({ isCreated }) {
                 </td>
                 <td data-testid={ `${dataTestId[72]}${index}` }>{user.role}</td>
                 <td data-testid={ `${dataTestId[73]}${index}` }>
-                  <button type="button">Excluir</button>
+                  <button
+                    type="button"
+                    onClick={ () => handleDeleteUser(user.id) }
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))
