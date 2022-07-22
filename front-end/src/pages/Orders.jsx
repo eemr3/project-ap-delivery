@@ -6,7 +6,7 @@ function Orders() {
   return (
     <main>
       <Navbar />
-      <CardOrder/>
+      <CardOrder />
     </main>
   );
 }
