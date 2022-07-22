@@ -14,11 +14,10 @@ function App() {
       <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ Products } />
       <Route path="/customer/checkout" component={ Checkout } />
-      <Route path="/administrator" component={ Administrator } />
+      <Route path="/admin/manage" component={ Administrator } />
       <Redirect exact from="/" to="/login" />
       <Route render={ () => <Redirect to="/login" /> } />
     </Switch>
-
   );
 }
 
