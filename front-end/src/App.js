@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Products from './pages/Products';
 import Checkout from './pages/Checkout';
+import Orders from './pages/Orders';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ Products } />
       <Route path="/customer/checkout" component={ Checkout } />
+      <Route path="/customer/orders" component={ Orders } />
       <Redirect exact from="/" to="/login" />
       <Route render={ () => <Redirect to="/login" /> } />
     </Switch>
