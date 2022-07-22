@@ -4,15 +4,19 @@ import { getOrders } from '../services/deliveryAPI';
 
 function CardOrder() {
   const [order, setOrder] = useState([]);
+  const [userRole, setUserRole] = useState('');
   const navigate = useHistory();
 
-  useEffect(() => {
-    const orderFunction = async () => {
-      const response = await getOrders();
+  const orderFunction = async () => {
+    const response = await getOrders();
+    console.log(response);
+    setOrder(response);
+  };
 
-      setOrder(response);
-    };
+  useEffect(() => {
     orderFunction();
+    const { role } = JSON.parse(localStorage.getItem('user'));
+    setUserRole(role);
   }, []);
 
   const parseDate = (date) => {
@@ -25,33 +29,45 @@ function CardOrder() {
     <div>
       <section>
         {
-          order.map(({ id, status, totalPrice, saleDate }) => (
+          order.map(({
+            id, status, totalPrice, saleDate, deliveryAddress, deliveryNumber,
+          }) => (
             <button
               type="button"
               key={ id }
-              onClick={ () => { navigate.push(`/customer/orders/${id}`); } }
-              onKeyDown={ () => { navigate.push(`/customer/orders/${id}`); } }
+              onClick={ () => { navigate.push(`/${userRole}/orders/${id}`); } }
+              onKeyDown={ () => { navigate.push(`/${userRole}/orders/${id}`); } }
             >
               <span
-                data-testid={ `customer_orders__element-order-id-${id}` }
+                data-testid={ `seller_orders__element-order-id-${id}` }
               >
                 {id}
               </span>
               <span
-                data-testid={ `customer_orders__element-delivery-status-${id}` }
+                data-testid={ `seller_orders__element-delivery-status-${id}` }
               >
                 {status}
               </span>
               <span
-                data-testid={ `customer_orders__element-card-price-${id}` }
+                data-testid={ `seller_orders__element-card-price-${id}` }
               >
                 {totalPrice.replace('.', ',')}
               </span>
               <span
-                data-testid={ `customer_orders__element-order-date-${id}` }
+                data-testid={ `seller_orders__element-order-date-${id}` }
               >
                 {parseDate(saleDate)}
-              </span>
+              </span
+              >
+              {
+                userRole === 'seller' ? (
+                  <span
+                    data-testid={ `seller_orders__element-card-address-${id}` }
+                  >
+                    {`${deliveryAddress}, ${deliveryNumber}`}
+                  </span>
+                ) : null
+              }
             </button>
           ))
         }

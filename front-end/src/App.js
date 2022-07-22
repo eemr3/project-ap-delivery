@@ -21,6 +21,8 @@ function App() {
       <Route path="/admin/manage" component={ Administrator } />
       <Route path="/customer/orders/:id" component={ SaleDetails } />
       <Route path="/customer/orders" component={ Orders } />
+      <Route path="/seller/orders/:id" component={ SaleDetails } />
+      <Route path="/seller/orders" component={ Orders } />
       <Redirect exact from="/" to="/login" />
       <Route render={ () => <Redirect to="/login" /> } />
     </Switch>

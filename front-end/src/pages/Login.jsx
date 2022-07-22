@@ -11,6 +11,7 @@ const validateEmail = (e) => {
 
 const ROUTE_CUSTOMER_PRODUCTS = '/customer/products';
 const ROUTE_ADMIN_MANAGE = '/admin/manage';
+const ROUTE_SELLER_ORDERS = '/seller/orders';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

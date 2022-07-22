@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Navbar from '../components/Navbar';
 
 function SaleDetails({ match }) {
   const { id } = match.params;
   return (
-    <div>
-      {id}
-    </div>
+    <>
+      <Navbar />
+      <div>
+        {id}
+      </div>
+    </>
   );
 }
 

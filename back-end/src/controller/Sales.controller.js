@@ -17,7 +17,7 @@ const getAll = async (req, res) => {
 const getAllByUser = async (req, res) => {
   const user = req.data;
 
-  const sales = await SalesService.getAllByUser(user.id);
+  const sales = await SalesService.getAllByUser(user.id, user.role);
 
   res.status(200).send(sales);
 };

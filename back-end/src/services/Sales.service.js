@@ -6,8 +6,10 @@ const getAll = async () => {
   return sales;
 };
 
-const getAllByUser = async (userId) => {
-  const sales = await Sale.findAll({ where: { userId } });
+const getAllByUser = async (userId, userRole) => {
+  const params = { [`${userRole}Id`]: userId };
+  console.log(params);
+  const sales = await Sale.findAll({ where: params });
 
   return sales;
 };
