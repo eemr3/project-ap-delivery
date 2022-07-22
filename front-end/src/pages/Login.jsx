@@ -10,7 +10,7 @@ const validateEmail = (e) => {
 };
 
 const ROUTE_CUSTOMER_PRODUCTS = '/customer/products';
-const ROUTE_ADMIN_MANAGE = '/administrator';
+const ROUTE_ADMIN_MANAGE = '/admin/manage';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -126,7 +126,7 @@ function Login() {
           <button
             type="button"
             className={ styles.btnRedirectRegister }
-            data-testid={ styles.commonLogin__buttonRegister }
+            data-testid="common_login__button-register"
             onClick={ () => navigate.push('../register', { replace: true }) }
           >
             Criar conta
