@@ -8,10 +8,33 @@ const { adminMiddleware } = require('../../middlewares/adminMiddleware');
 
 const routes = express.Router();
 
-routes.get('/', authMiddleware, adminMiddleware, RegisterController.getAllUsers);
-routes.post('/', validateJoi(validRegister), rescue(RegisterController.createRegister));
-routes.post('/admin', authMiddleware, validateJoi(validRegister),
-  rescue(RegisterController.createRegister));
-routes.delete('/:id', authMiddleware, adminMiddleware, rescue(RegisterController.deleteRegister));
+routes.get(
+  '/',
+  authMiddleware,
+  adminMiddleware,
+  RegisterController.getAllUsers,
+);
+routes.get(
+  '/sellers',
+  authMiddleware,
+  rescue(RegisterController.getAllSellers),
+);
+routes.post(
+  '/',
+  validateJoi(validRegister),
+  rescue(RegisterController.createRegister),
+);
+routes.post(
+  '/admin',
+  authMiddleware,
+  validateJoi(validRegister),
+  rescue(RegisterController.createRegister),
+);
+routes.delete(
+  '/:id',
+  authMiddleware,
+  adminMiddleware,
+  rescue(RegisterController.deleteRegister),
+);
 
 module.exports = routes;

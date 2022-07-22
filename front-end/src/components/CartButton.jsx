@@ -20,7 +20,7 @@ function CartButton() {
       type="button"
       data-testid="customer_products__button-cart"
       className="cart-btn"
-      onClick={ () => navigate('/customer/checkout') }
+      onClick={ () => navigate.push('/customer/checkout') }
       disabled={ total === '0,00' || total === '0.00' ? 1 : 0 }
     >
       Ver carrinho:

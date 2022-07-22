@@ -6,8 +6,8 @@ const validSales = Joi.object({
     ).required(),
     sellerId: Joi.number().required(),
     deliveryAddress: Joi.string().required(),
-    deliveryNumber: Joi.number().required(),
-    totalPrice: Joi.number().required(),
+    deliveryNumber: Joi.string().required(),
+    totalPrice: Joi.string().required(),
 });
 
 const validStatus = Joi.object({
