@@ -7,7 +7,8 @@ const getAll = async () => {
 };
 
 const getAllByUser = async (userId, userRole) => {
-  const params = { [`${userRole}Id`]: userId };
+  const column = userRole === 'customer' ? 'userId' : 'sellerId';
+  const params = { [column]: userId };
   console.log(params);
   const sales = await Sale.findAll({ where: params });
 
