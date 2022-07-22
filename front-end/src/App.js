@@ -15,9 +15,9 @@ function App() {
       <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ Products } />
       <Route path="/customer/checkout" component={ Checkout } />
+      <Route path="/customer/orders/:id" component={ SaleDetails } />
       <Route path="/customer/orders" component={ Orders } />
       <Redirect exact from="/" to="/login" />
-      <Route path="/customer/orders/:id" component={ SaleDetails } />
       <Route render={ () => <Redirect to="/login" /> } />
     </Switch>
 
