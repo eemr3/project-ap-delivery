@@ -4,6 +4,12 @@ const ErrorBase = require('../util/errorBase');
 const { already } = require('../util/messageError');
 const { createdToken } = require('../auth/token');
 
+const getAllSellers = async () => {
+  const sellers = await User.findAll({ where: { role: 'seller' } });
+
+  return sellers;
+};
+
 const createRegister = async (userInfo) => {
   const { email, password } = userInfo;
 
@@ -46,4 +52,5 @@ const deleteRegister = async (id) => {
 module.exports = {
   createRegister,
   deleteRegister,
+  getAllSellers,
 };

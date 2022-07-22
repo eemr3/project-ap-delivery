@@ -1,5 +1,5 @@
 import axios from 'axios';
-import getHeaders from '../utils';
+import { getHeaders } from '../utils';
 
 const api = axios.create({
   baseURL: `http://localhost:${process.env.REACT_APP_API_PORT || '3001'}`,
@@ -17,13 +17,14 @@ export const getProducts = async () => {
 };
 
 export const getSellers = async () => {
-  const { data } = await api.get('/checkout');
+  const { data } = await api.get('/register/sellers', getHeaders());
+
   return data;
 };
 
-export const createSale = async (data) => {
-  const response = await api.post('/checkout', data, getHeaders());
-  return response;
+export const createSale = async (body) => {
+  const { data } = await api.post('/sales', body, getHeaders());
+  return data;
 };
 
 export const getOrders = async () => {

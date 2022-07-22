@@ -29,7 +29,7 @@ function Register() {
       localStorage.setItem('user', JSON.stringify(
         { ...response.dataValues, token: response.token },
       ));
-      navigate('../customer/products');
+      navigate.push('../customer/products');
       setViewError(false);
     } catch (error) {
       console.log(error);
