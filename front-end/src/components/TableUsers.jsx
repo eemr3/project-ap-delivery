@@ -28,15 +28,23 @@ function TableUsers({ isCreated }) {
         </tr>
       </thead>
       <tbody>
-        {userData.length > 0 ? userData.map((user) => (
-          <tr key={ user.id }>
-            <th data-testid={ dataTestId[69] }>{user.id}</th>
-            <th data-testid={ dataTestId[70] }>{user.name}</th>
-            <th data-testid={ dataTestId[71] }>{user.email}</th>
-            <th data-testid={ dataTestId[72] }>{user.role}</th>
-            <th data-testid={ dataTestId[73] }><button type="button">Excluir</button></th>
-          </tr>
-        )) : ''}
+        {userData.length > 0
+          ? userData
+            .filter((user) => user.role !== 'administrator')
+            .map((user, index) => (
+              <tr key={ user.id }>
+                <td data-testid={ `${dataTestId[69]}${index}` }>{index + 1}</td>
+                <td data-testid={ `${dataTestId[70]}${index}` }>{user.name}</td>
+                <td data-testid={ `${dataTestId[71]}${index}` }>
+                  {user.email}
+                </td>
+                <td data-testid={ `${dataTestId[72]}${index}` }>{user.role}</td>
+                <td data-testid={ `${dataTestId[73]}${index}` }>
+                  <button type="button">Excluir</button>
+                </td>
+              </tr>
+            ))
+          : ''}
       </tbody>
     </table>
   );
@@ -44,11 +52,9 @@ function TableUsers({ isCreated }) {
 
 TableUsers.propTypes = {
   isCreated: PropTypes.bool,
-
 };
 
 TableUsers.defaultProps = {
   isCreated: false,
-
 };
 export default TableUsers;
