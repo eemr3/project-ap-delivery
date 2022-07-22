@@ -56,4 +56,12 @@ export const getOrders = async () => {
   return data;
 };
 
+export const deleteUser = async (id) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  await api.delete(`/register/${id}`, {
+    headers: {
+      authorization: token,
+    },
+  });
+};
 export default api;
