@@ -39,22 +39,34 @@ function CardOrder() {
               onKeyDown={ () => { navigate.push(`/${userRole}/orders/${id}`); } }
             >
               <span
-                data-testid={ `seller_orders__element-order-id-${id}` }
+                data-testid={
+                  userRole === 'seller' ? `seller_orders__element-order-id-${id}`
+                    : `customer_orders__element-order-id-${id}`
+                }
               >
                 {id}
               </span>
               <span
-                data-testid={ `seller_orders__element-delivery-status-${id}` }
+                data-testid={
+                  userRole === 'seller' ? `seller_orders__element-delivery-status-${id}`
+                    : `customer_orders__element-delivery-status-${id}`
+                }
               >
                 {status}
               </span>
               <span
-                data-testid={ `seller_orders__element-card-price-${id}` }
+                data-testid={
+                  userRole === 'seller' ? `seller_orders__element-card-price-${id}`
+                    : `customer_orders__element-card-price-${id}`
+                }
               >
                 {totalPrice.replace('.', ',')}
               </span>
               <span
-                data-testid={ `seller_orders__element-order-date-${id}` }
+                data-testid={
+                  userRole === 'seller' ? `seller_orders__element-order-date-${id}`
+                    : `customer_orders__element-order-date-${id}`
+                }
               >
                 {parseDate(saleDate)}
               </span
@@ -62,7 +74,7 @@ function CardOrder() {
               {
                 userRole === 'seller' ? (
                   <span
-                    data-testid={ `seller_orders__element-card-address-${id}` }
+                    data-testid={ `seller_orders__elemesnt-card-address-${id}` }
                   >
                     {`${deliveryAddress}, ${deliveryNumber}`}
                   </span>
