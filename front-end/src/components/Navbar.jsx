@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import dataTestId from '../utils/dataTestIds';
 
 const TITLE = 'Cevarápida';
 function Navbar() {
@@ -35,7 +36,7 @@ function Navbar() {
   if (role === 'administrator') {
     return (
       <header className="header">
-        <h2>{TITLE}</h2>
+        <h2 data-testid={ dataTestId[12] }>{TITLE}</h2>
         <nav className="navbar">
           <h3 data-testid="customer_products__element-navbar-user-full-name">
             { name }
