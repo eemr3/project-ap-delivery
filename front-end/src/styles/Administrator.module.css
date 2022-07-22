@@ -1,3 +1,14 @@
-.containerForm {
-  display: flex;
+.container { 
+  margin: 40px auto;
+  max-width: 1440px;
+}
+
+.sectoinForm {
+  border: 1px solid black;
+  height: 140px;
+  padding: 5px;
+}
+
+.sectionTable {
+  margin-top: 40px;
 }

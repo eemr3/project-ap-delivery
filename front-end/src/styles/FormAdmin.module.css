@@ -1,0 +1,48 @@
+.containerForm {
+  gap: 8px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.containerForm > .btnNewUser {  
+  border: none;
+  border-radius: 2px;
+  color: rgb(24, 24, 24);
+  cursor: pointer;
+  font-size: 16px;
+  height: 44px;
+  width: 80px;
+}
+.containerForm > label > input, .containerForm > button {
+  box-sizing: border-box;
+  margin-right: 5px;  
+}
+
+.containerForm > label {
+  color: black;
+}
+
+.containerForm > label > input {
+  background-color: transparent;
+  border-color: 1px rgb(205, 205, 205);
+  border-style: solid;
+  font-kerning: normal;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-top: 8px;
+  padding: 12px 20px;
+  width: 350px;
+}
+
+.containerForm > select {
+  background-color: transparent;
+  border-color: 1px rgb(205, 205, 205);
+  border-style: solid;
+  font-kerning: normal;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-top: 8px;
+  margin-right: 5px;
+  padding: 12px 20px;
+  width: 200px;
+}
