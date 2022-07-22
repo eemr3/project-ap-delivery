@@ -9,6 +9,16 @@ export const requestLogin = async (endpoint, body) => {
   return data;
 };
 
+export const requestADM = async (body) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { data } = await api.post('/register/admin', body, {
+    headers: {
+      Authorization: token,
+    },
+  });
+  return data;
+};
+
 export const getAllUsers = async (endpoint) => {
   const { token } = JSON.parse(localStorage.getItem('user'));
   const { data } = await api.get(endpoint, {
