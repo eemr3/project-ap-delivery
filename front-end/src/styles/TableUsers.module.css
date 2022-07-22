@@ -1,6 +1,6 @@
 .customers {
   border-collapse: collapse;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial , Helvetica , sans-serif;
   width: 100%;
 }
 
@@ -9,7 +9,7 @@
   padding: 8px;
 }
 
-.customers tr:nth-child(even){
+.customers tr:nth-child( even ) {
   background-color: #f2f2f2;
 }
 

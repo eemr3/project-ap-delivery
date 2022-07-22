@@ -4,7 +4,7 @@
   margin-top: 10px;
 }
 
-.containerForm > .btnNewUser {  
+.containerForm > .btnNewUser {
   border: none;
   border-radius: 2px;
   color: rgb(24, 24, 24);
@@ -13,9 +13,10 @@
   height: 44px;
   width: 80px;
 }
+
 .containerForm > label > input, .containerForm > button {
   box-sizing: border-box;
-  margin-right: 5px;  
+  margin-right: 5px;
 }
 
 .containerForm > label {
@@ -41,8 +42,8 @@
   font-kerning: normal;
   font-size: 14px;
   margin-bottom: 20px;
-  margin-top: 8px;
   margin-right: 5px;
+  margin-top: 8px;
   padding: 12px 20px;
   width: 200px;
 }
