@@ -27,4 +27,13 @@ export const createSale = async (body) => {
   return data;
 };
 
+export const getOrders = async () => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { data } = await api.get('/sales/user', {
+    headers: { authorization: token },
+  });
+
+  return data;
+};
+
 export default api;
