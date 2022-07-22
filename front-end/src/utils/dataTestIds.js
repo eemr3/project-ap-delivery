@@ -72,6 +72,7 @@ const dataTestId = {
   71: 'admin_manage__element-user-table-email-',
   72: 'admin_manage__element-user-table-role-',
   73: 'admin_manage__element-user-table-remove-',
+  74: 'admin_manage__element-invalid-register',
 };
 
 export default dataTestId;
