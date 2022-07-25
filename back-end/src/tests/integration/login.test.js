@@ -49,7 +49,7 @@ describe("Rota de Login", () => {
 
     it("Testa erro da requisição com senha inválidos", async () => {
       const response = await chai.request(app).post("/login").send({
-        email: "johndoe@test.com",
+        email: "zebirita@email.com",
         password: "teste22",
       });
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { requestLogin } from '../services/deliveryAPI';
 import logo from '../images/logo.png';
-import '../styles/Register.css';
+import styles from '../styles/Register.module.css';
 
 function Register() {
   const [name, setName] = useState('');
@@ -24,11 +24,12 @@ function Register() {
     try {
       const endpoint = '/register';
       const role = 'customer';
-      const response = await requestLogin(endpoint, { name, email, password });
+      const response = await requestLogin(endpoint, { name, email, password, role });
+      console.log(response);
       localStorage.setItem('user', JSON.stringify(
-        { name, email, role, token: response.hasToken },
+        { ...response.dataValues, token: response.hasToken },
       ));
-      navigate.push('/customer/products');
+      navigate.push('../customer/products');
       setViewError(false);
     } catch (error) {
       console.log(error);
@@ -37,12 +38,12 @@ function Register() {
   };
 
   return (
-    <main className="register-page title-register">
-      <div className="logo">
+    <main className={ styles.registerPage }>
+      <div className={ styles.logo }>
         <img src={ logo } alt="logo" />
         <h1>Cadastro</h1>
       </div>
-      <form>
+      <form className={ styles.formContainer }>
         <label htmlFor="name">
           <input
             type="name"
@@ -82,7 +83,7 @@ function Register() {
         </span>
         <button
           type="button"
-          className="btn-register"
+          className={ styles.btnRegister }
           data-testid="common_register__button-register"
           onClick={ submitLogin }
           disabled={ validateEmail(email)

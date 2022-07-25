@@ -5,18 +5,22 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.DECIMAL,
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
-    saleDate: DataTypes.DATEONLY,
+    saleDate: DataTypes.DATE,
     status: DataTypes.STRING
   }, {
     underscored: true,
-    tableName: 'users',
+    tableName: 'sales',
     timestamps: false
   });
 
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, {
-      as: 'users',
-      foreignKey: 'id',
+      as: 'user',
+      foreignKey: 'userId',
+    });
+    Sale.belongsTo(models.User, {
+      as: 'seller',
+      foreignKey: 'sellerId',
     });
   };
 

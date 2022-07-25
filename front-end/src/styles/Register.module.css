@@ -1,0 +1,73 @@
+.formContainer {
+  background-color: white;
+  border-color: 1px black;
+  border-style: solid;
+  padding: 20px;
+}
+
+.registerPage {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.formContainer > .btnRegister {
+  background-color: rgb(16, 118, 243);
+  border: none;
+  border-radius: 2px;
+  color: rgb(24, 24, 24);
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  padding: 8px;
+  width: 100%;
+}
+
+.formContainer > .btnRegister:disabled {
+  background-color: black;
+  color: white;
+  cursor: not-allowed;
+}
+
+.formContainer > label > input, .formContainer > button {
+  box-sizing: border-box;
+  display: block;
+}
+
+.formContainer > label {
+  color: black;
+}
+
+.formContainer > label > input {
+  background-color: transparent;
+  border-color: 1px rgb(205, 205, 205);
+  border-style: solid;
+  font-kerning: normal;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-top: 8px;
+  padding: 12px 20px;
+  width: 350px;
+}
+
+.logo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo > img {
+  width: 120px;
+}
+
+.logo > h1 {
+  color: black;
+  font-kerning: normal;
+  font-weight: 510;
+  margin: 0;
+  margin-bottom: 20px;
+  padding-top: 20%;
+}

@@ -1,17 +1,17 @@
 const { Product } = require('../database/models');
 const ErrorBase = require('../util/errorBase');
-const { notFound, conflict } = require('../util/messageError');
+const { notFound, productConflict } = require('../util/messageError');
 
 const getByNameProduct = async (name) => {
-  const product = Product.findOne({ where: { name } });
-  if (!product) throw ErrorBase(notFound.status, notFound.message);
+  const product = await Product.findOne({ where: { name } });
+  
   return product;
 };
 
 const createProduct = async (body) => {
   const productExist = await getByNameProduct(body.name);
   
-  if (productExist) throw ErrorBase(conflict.status, conflict.message); 
+  if (productExist) throw ErrorBase(productConflict.status, productConflict.message); 
   
   const product = await Product.create(body);
 
@@ -37,20 +37,24 @@ const updateProduct = async (id, body) => {
 
   if (!productExist) throw ErrorBase(notFound.status, notFound.message);
 
-  const ok = await Product.update(body, { where: { id } });
-
-  if (!ok) throw ErrorBase(500, 'Internal error');
+  await Product.update(body, { where: { id } });
 };
 
-const deletProduct = async (id) => {
+const deleteProduct = async (id) => {
   const productExist = await getByIdProduct(id);
 
   if (!productExist) throw ErrorBase(notFound.status, notFound.message);
 
-  const ok = await Product.destroy({ where: { id } });
+  await Product.destroy({ where: { id } });
+};
 
-  if (!ok) throw ErrorBase(500, 'Internal error');
-}; 
+const validateProducts = async (products) => {
+  const promises = products.map(({ id }) => getByIdProduct(id));
+
+  const productsData = await Promise.all(promises);
+
+  return productsData.some((p) => p);
+};
 
 module.exports = {
   createProduct,
@@ -58,5 +62,6 @@ module.exports = {
   getByNameProduct,
   getByIdProduct,
   updateProduct,
-  deletProduct,
+  deleteProduct,
+  validateProducts,
 };

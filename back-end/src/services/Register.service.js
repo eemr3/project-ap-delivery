@@ -1,35 +1,62 @@
 const md5 = require('md5');
 const { User } = require('../database/models');
 const ErrorBase = require('../util/errorBase');
-const { createdToken } = require('../auth/token');
 const { already } = require('../util/messageError');
+const { createdToken } = require('../auth/token');
+
+const getAllSellers = async () => {
+  const sellers = await User.findAll({ where: { role: 'seller' } });
+
+  return sellers;
+};
 
 const createRegister = async (userInfo) => {
-  const { password, email, name } = userInfo;
+  const { email, password } = userInfo;
 
-  const user = {
-    name,
-    email,
-    role: 'customer',
-  };
-
-  const hasToken = await createdToken(user);
   const encryptedPassword = md5(password);
+
   const userExist = await User.findOne({ where: { email } });
-  
+
   if (userExist) throw ErrorBase(already.status, already.message);
 
-  const createdUser = await User.create({
-    ...user,
+  const { id, name, role } = await User.create({
+    ...userInfo,
+    role: userInfo.role || 'customer',
     password: encryptedPassword,
   });
 
+  const hasToken = await createdToken({ id, name, email, role });
+
   return {
-    user: createdUser,
+    user: {
+      name,
+      email,
+      role,
+    },
     hasToken,
+  };
+};
+
+const getAllUsers = async () => {
+  const users = await User.findAll();
+  return users;
+};
+
+const deleteRegister = async (id) => {
+  const user = await User.findByPk(id);
+
+  if (!user) throw ErrorBase(404, 'User not found');
+
+  await user.destroy();
+
+  return {
+    message: 'User deleted',
   };
 };
 
 module.exports = {
   createRegister,
+  deleteRegister,
+  getAllUsers,
+  getAllSellers,
 };
