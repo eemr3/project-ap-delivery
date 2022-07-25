@@ -42,10 +42,10 @@ describe("Rota de Vendas", () => {
         ],
         sellerId: 2,
         deliveryAddress: 'Rua sem saída',
-        deliveryNumber: 0,
-        totalPrice: 48,
+        deliveryNumber: "0",
+        totalPrice: "48",
       });
-
+console.log(response)
       expect(response.status).to.eq(201);
       expect(response.body).to.have.property('id');
       expect(response.body).to.have.property('saleDate');

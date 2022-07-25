@@ -12,34 +12,33 @@ describe("Rota de Registro", () => {
   let administratorToken;
   let customerToken;
 
-  it('consegue logar como vendedor', async () => {
+  it("consegue logar como vendedor", async () => {
     const response = await chai.request(app).post("/login").send({
-      email: 'adm@deliveryapp.com',
-      password: '--adm2@21!!--'
+      email: "adm@deliveryapp.com",
+      password: "--adm2@21!!--",
     });
 
     administratorToken = response.body.hasToken;
   });
 
-  it('consegue logar como customer', async () => {
+  it("consegue logar como customer", async () => {
     const response = await chai.request(app).post("/login").send({
-      email: 'zebirita@email.com',
-      password: '$#zebirita#$'
+      email: "zebirita@email.com",
+      password: "$#zebirita#$",
     });
 
     customerToken = response.body.hasToken;
   });
-  
+
   describe('metodo "POST"', () => {
-    
     it("testa se é possivel registrar um usuário novo com sucesso", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe@test.com',
-        password: '123456',
-        role: 'customer'
+        name: "john doe tester",
+        email: "johndoe@test.com",
+        password: "123456",
+        role: "customer",
       });
-      
+
       expect(response).to.have.status(201);
       expect(response.body.user).to.have.property("name");
       expect(response.body.user).to.have.property("email");
@@ -49,10 +48,10 @@ describe("Rota de Registro", () => {
 
     it("testa se é possivel registrar um usuário novo sem sucesso", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe@test.com',
-        password: '123456',
-        role: 'customer',
+        name: "john doe tester",
+        email: "johndoe@test.com",
+        password: "123456",
+        role: "customer",
       });
 
       expect(response).to.have.status(409);
@@ -61,102 +60,125 @@ describe("Rota de Registro", () => {
 
     it("Testa erro da requisição com email inválido", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe.com',
-        password: '123456'
+        name: "john doe tester",
+        email: "johndoe.com",
+        password: "123456",
       });
-      
+
       expect(response.statusCode).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal("\"email\" must be a valid email");
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal('"email" must be a valid email');
     });
 
     it("Testa erro da requisição com senha inválida", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe@gmail.com',
-        password: '12345'
+        name: "john doe tester",
+        email: "johndoe@gmail.com",
+        password: "12345",
       });
 
       expect(response.statusCode).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal("\"password\" length must be at least 6 characters long");
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal(
+        '"password" length must be at least 6 characters long'
+      );
     });
 
     it("Testa erro da requisição com nome inválido", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe',
-        email: 'johndoe@gmail.com',
-        password: '12345'
+        name: "john doe",
+        email: "johndoe@gmail.com",
+        password: "12345",
       });
 
       expect(response.statusCode).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal("\"name\" length must be at least 12 characters long");
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal(
+        '"name" length must be at least 12 characters long'
+      );
     });
-    
+
     it("Testa erro da requisição sem a propriedade name", async () => {
       const response = await chai.request(app).post("/register").send({
-        email: 'johndoe@gmail.com',
-        password: '123456'
-      });      
-      
+        email: "johndoe@gmail.com",
+        password: "123456",
+      });
+
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal('\"name\" is required');
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal('"name" is required');
     });
 
     it("Testa erro da requisição sem a propriedade email", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        password: '123456'
-      });      
-      
+        name: "john doe tester",
+        password: "123456",
+      });
+
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal('\"email\" is required');
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal('"email" is required');
     });
 
     it("Testa erro da requisição sem a propriedade password", async () => {
       const response = await chai.request(app).post("/register").send({
-        name: 'john doe tester',
-        email: 'johndoe@gmail.com'
-      });      
-      
+        name: "john doe tester",
+        email: "johndoe@gmail.com",
+      });
+
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.have.property('message');
-      expect(response.body.message).to.equal('\"password\" is required');
+      expect(response.body).to.have.property("message");
+      expect(response.body.message).to.equal('"password" is required');
     });
   });
 
-  describe('método DELETE', async () => {
+  describe("método DELETE", async () => {
     it("testa se é possivel deletar um usuário com sucesso", async () => {
-      const response = await chai.request(app)
-      .delete("/register/4")
-      .set("Authorization", administratorToken);
-      
+      const response = await chai
+        .request(app)
+        .delete("/register/4")
+        .set("Authorization", administratorToken);
+
       expect(response).to.have.status(200);
-      expect(response.body.message).to.eq('User deleted')
+      expect(response.body.message).to.eq("User deleted");
     });
 
     it("testa se não é possivel deletar um usuário não existente", async () => {
-      const response = await chai.request(app)
-      .delete("/register/25")
-      .set("Authorization", administratorToken);
+      const response = await chai
+        .request(app)
+        .delete("/register/25")
+        .set("Authorization", administratorToken);
 
-      console.log(response.body);
-      
       expect(response).to.have.status(404);
-      expect(response.body.message).to.eq('User not found')
+      expect(response.body.message).to.eq("User not found");
     });
 
     it("testa se é possivel deletar um usuário sem sucesso como customer", async () => {
-      const response = await chai.request(app)
-      .delete("/register/1")
-      .set("Authorization", customerToken);
-      
+      const response = await chai
+        .request(app)
+        .delete("/register/1")
+        .set("Authorization", customerToken);
+
       expect(response).to.have.status(401);
-      expect(response.body.message).to.eq('Unauthorized');
+      expect(response.body.message).to.eq("Unauthorized");
+    });
+  });
+
+  describe("método FINDALL", async() => {
+    it("é possivel buscar todos os usuáros no banco dedados", async () => {
+      const response = await chai
+        .request(app)
+        .get("/register")
+        .set("Authorization", administratorToken);
+
+      expect(response).to.have.status(200);
+      response.body.forEach((user) => {
+        expect(user).to.have.property('id');
+        expect(user).to.have.property('name');
+        expect(user).to.have.property('email');
+        expect(user).to.have.property('password');
+        expect(user).to.have.property('role');
+      });
     });
   });
 });
