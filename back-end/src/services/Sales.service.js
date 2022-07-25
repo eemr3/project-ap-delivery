@@ -1,4 +1,5 @@
-const { Sale, SaleProduct, User } = require('../database/models');
+const { Sale, SaleProduct, User, Product } = require('../database/models');
+// const RegisterService = require('./Register.service');
 
 const getAll = async () => {
   const sales = await Sale.findAll();
@@ -9,14 +10,21 @@ const getAll = async () => {
 const getAllByUser = async (userId, userRole) => {
   const column = userRole === 'customer' ? 'userId' : 'sellerId';
   const params = { [column]: userId };
-  console.log(params);
+
   const sales = await Sale.findAll({ where: params });
 
   return sales;
 };
 
 const getById = async (id) => {
-  const sale = await Sale.findOne({ where: { id } });
+  const sale = await Sale.findOne({
+    where: { id },
+    include: [
+      { model: Product, as: 'products' },
+      { model: User, as: 'user' },
+      { model: User, as: 'seller' },
+    ],
+  });
 
   return sale;
 };

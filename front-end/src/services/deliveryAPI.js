@@ -56,6 +56,24 @@ export const getOrders = async () => {
   return data;
 };
 
+export const getOrder = async (id) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { data } = await api.get(`/sales/${id}`, {
+    headers: { authorization: token },
+  });
+
+  return data;
+};
+
+export const updateStatus = async (id, status) => {
+  const { token } = JSON.parse(localStorage.getItem('user'));
+  const { data } = await api.patch(`/sales/${id}`,
+    { status },
+    { headers: { authorization: token } });
+
+  return data;
+};
+
 export const deleteUser = async (id) => {
   const { token } = JSON.parse(localStorage.getItem('user'));
   await api.delete(`/register/${id}`, {

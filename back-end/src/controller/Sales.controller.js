@@ -35,7 +35,7 @@ const patchStatus = async (req, res) => {
   const { status } = req.body;
   const { id } = req.params;
 
-  if (user.role === 'customer') {
+  if (user.role === 'customer' && status !== 'Entregue') {
     res.status(unauthorized.status).send({ message: unauthorized.message });
   }
 
